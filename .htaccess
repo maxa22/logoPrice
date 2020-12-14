@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+RewriteRule ^([a-z0-9]+)$ calculator_redirect.php?id=$1

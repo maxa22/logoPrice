@@ -1,0 +1,45 @@
+<!-- problem sa funckijom validateUserInput -->
+
+<?php
+    require_once('include/db_connection.php');
+    require_once('include/functions.inc.php');
+    $errorMessage = '';
+    if(isset($_POST['submit'])) {
+
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errorMessage = 'Please provide valid email';
+        } else {
+            findUser($conn, $email, $password);
+        }
+
+    }
+?>
+
+<!DOCTYPE html>
+<?php require_once('include/head.php'); ?>
+<body>
+    <?php require_once('include/nav.php'); ?>
+    <main>
+        
+    <form action="" method="POST" class="registration-form form login">
+        <div class="main__heading">
+            <h1>Login</h1>
+        </div>
+        <div>
+            <label for="email">Email address</label> <br>
+            <input type="text" name="email" id="email">
+        </div>
+        <div>
+            <label for="password">Password</label> <br>
+            <input type="password" name="password" id="password">
+        </div>
+        <button type="submit" name="submit">Login</button>
+        <p>New user? <a href="register.php" class="info">Create account</a>.</p>
+    </form>
+    <?php echo $errorMessage ?? ''; ?>
+</main>
+</body>
+</html>
