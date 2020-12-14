@@ -482,7 +482,10 @@ main {
   color: #17a2b8;
   text-decoration: none;
 }
-
+.error {
+  display: block;
+  color: #dc3545;
+}
 @media screen and (max-width: 85rem) {
   .navigation__link.desktop {
     display: none;

@@ -11,9 +11,9 @@
 
         if(!validateUserInput($conn, $fullName, $email, $password, $confirmPassword)) {
             createUser($conn, $fullName, $email, $password);
-            header('Location: index.php?error=none');
+            header('Location: login.php');
         } else {
-            $errorMessage = validateUserInput($fullName, $email, $password, $confirmPassword, $conn);
+            $errorMessage = validateUserInput($conn, $fullName, $email, $password, $confirmPassword);
         }
 
     }
@@ -32,23 +32,23 @@
             </div>
             <div>
                 <label for="name">Full Name</label> <br>
-                <input type="text" name="fullName" id="fullName">
+                <input type="text" name="fullName" id="fullName" value="<?php echo isset($_POST['submit']) ? $fullName : '' ; ?>">
             </div>
             <div>
                 <label for="name">Email Address</label> <br>
-                <input type="text" name="email" id="email">
+                <input type="text" name="email" id="email" value="<?php echo isset($_POST['submit']) ? $email : '' ; ?>">
             </div>
             <div>
                 <label for="password">Password</label> <br>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" value="<?php echo isset($_POST['submit']) ? $password : '' ; ?>">
             </div>
             <div>
                 <label for="confirm-password">Confirm Password</label> <br>
-                <input type="password" name="confirmPassword" id="confirm-password">
+                <input type="password" name="confirmPassword" id="confirm-password" value="<?php echo isset($_POST['submit']) ? $confirmPassword : '' ; ?>">
             </div>
+            <span class="error"><?php echo $errorMessage; ?></span>
             <button type="submit" name="submit">Register</button>
         </form>
-    <?php echo $errorMessage ?? ''; ?>
 </main>
 </body>
 </html>

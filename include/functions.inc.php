@@ -19,7 +19,7 @@
             $error = 'Passwords must match';
             return $error;
         }
-        if(!userExists($conn, $email)) {
+        if(userExists($conn, $email)) {
             $error = 'Email already taken';
         }
         return $error;
@@ -85,7 +85,8 @@
         $user = userExists($conn, $email);
         
         if(!$user) {
-            $error = 'No such user found.';
+            $error = 'Wrong email or password.';
+            return $error;
         }
         if(password_verify($password, $user['userPassword'])) {
             session_start();
@@ -93,6 +94,9 @@
             $_SESSION['id'] = $user['id'];
             header('Location: admin.php?' . $user['fullName']);
             exit();
+        } else {
+            $error = 'Wrong email or password.';
+            return $error;
         }
     }
     //creating calculator name

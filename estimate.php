@@ -14,7 +14,11 @@
             $price += $option['optionPrice'];
         }
     }
-    setcookie('price', $price, time() + (86400 * 30));
+    if(isset($_COOKIE['price'])) {
+        $_COOKIE['price'] = $price;
+    } else {
+        setcookie('price', $price, time() + (86400 * 30));
+    }
     }
     //updating all the stepStatus field of the used steps
     $query = "UPDATE step SET stepStatus = '1' WHERE id = ?";
@@ -58,7 +62,7 @@
 <body>
     <?php require_once('include/nav.php'); ?>
     <div class="intro form">
-        <h1 class="intro__heading">your logo estimate <span><?php echo $_COOKIE['price']; ?>BAM</span></h1>
+        <h1 class="intro__heading">your logo estimate <span><?php echo$_COOKIE['price']; ?>BAM</span></h1>
     </div>
 
 </body>

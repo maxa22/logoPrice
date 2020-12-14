@@ -12,7 +12,7 @@
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errorMessage = 'Please provide valid email';
         } else {
-            findUser($conn, $email, $password);
+            $errorMessage = findUser($conn, $email, $password);
         }
 
     }
@@ -30,16 +30,17 @@
         </div>
         <div>
             <label for="email">Email address</label> <br>
-            <input type="text" name="email" id="email">
+            <input type="text" name="email" id="email" value="<?php echo isset($_POST['submit']) ? $email : '' ; ?>">
         </div>
         <div>
             <label for="password">Password</label> <br>
-            <input type="password" name="password" id="password">
+            <input type="password" name="password" id="password" value="<?php echo isset($_POST['submit']) ? $password : '' ; ?>">
         </div>
+        <span class="error"> <?php echo $errorMessage ?? ''; ?> </span>
         <button type="submit" name="submit">Login</button>
         <p>New user? <a href="register.php" class="info">Create account</a>.</p>
     </form>
-    <?php echo $errorMessage ?? ''; ?>
+    
 </main>
 </body>
 </html>
