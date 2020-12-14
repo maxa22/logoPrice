@@ -14,7 +14,8 @@
             $price += $option['optionPrice'];
         }
     }
-
+    setcookie('price', $price, time() + (86400 * 30));
+    }
     //updating all the stepStatus field of the used steps
     $query = "UPDATE step SET stepStatus = '1' WHERE id = ?";
     $stmt = $conn->stmt_init();
@@ -48,8 +49,7 @@
         }
         $stmt->close();
     }
-    setcookie('price', $price, time() + (86400 * 30));
-    }
+    
 ?>
 
 <!DOCTYPE html>

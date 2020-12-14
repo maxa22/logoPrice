@@ -8,11 +8,12 @@
             <button class="intro__button save">Get started</button>
         </div>
         
-        <form action="estimate.php" method="POST">
             <?php
                 $query = "SELECT * FROM step WHERE calculator_id = ?";
                 $stepResult = select($conn, $calculator, $query);
-                while($stepRow = $stepResult->fetch_assoc()) { ?>
+                if($stepResult->num_rows > 0) { ?>
+                <form action="estimate.php" method="POST">
+                <?php while($stepRow = $stepResult->fetch_assoc()) { ?>
 
                     <div class="input-wrapper step-<?php echo $stepRow['id']; ?>">
                         <h2><?php echo $stepRow['stepName']; ?></h2>
@@ -33,8 +34,14 @@
                         </div>
                     </div>
                 <?php } ?>
-            <div class="input-wrapper">
-                <button name="submit" class="intro__button save">Get your price estimate</button>                     
-            </div>
-        </form>
-<?php } ?>
+                <div class="input-wrapper">
+                    <button name="submit" class="intro__button save">Get your price estimate</button>                     
+                </div>
+                </form>
+                
+            <?php } else { ?>
+                <div class="input-wrapper">
+                    <p>No default calculator...</p>
+                </div>
+
+<?php } } ?>
