@@ -32,7 +32,7 @@
     <?php require_once('include/admin/admin_nav.php'); ?>
     <?php require_once('include/admin/admin_sidebar.php'); ?>
     <main>
-        <form action="" method="POST" class="registration-form form login">
+        <form action="" method="POST" class="form login">
         <div class="main__heading">
             <h1>Create Caltulator</h1>
         </div>

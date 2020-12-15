@@ -37,7 +37,7 @@
     <form action="include/edit.inc.php" method="POST">
         <?php
             while($stepRow = $stepResult->fetch_assoc()) { ?>
-            <div class="registration-form form" data-id="<?php echo $calculator['id'] . '-' . $stepRow['id']; ?>">
+            <div class="form" data-id="<?php echo $calculator['id'] . '-' . $stepRow['id']; ?>">
                 <div class="edit-form__question-container" >
                     <h3>Question</h3>
                     <input type="text" name="<?php echo $calculator['id'] . '-' . $stepRow['id'] . '-question'; ?>" disabled value="<?php echo $stepRow['stepName']; ?>">

@@ -41,7 +41,6 @@ for(const addOption of addOptions) {
             const optionDiv = document.createElement('div');
             optionDiv.classList.add('edit-form__option');
             optionDiv.classList.add('active');
-            console.log({questionContainer});
             const id = questionContainer.getAttribute('data-id');
             optionDiv.innerHTML = `
                     <h3>Option ${optionCount}</h3>

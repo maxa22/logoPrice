@@ -36,8 +36,8 @@
             createOptions($conn, $name, $price, $url, $row['id']);
             $i++;
         }
+        $successMessage = 'Question successfully added to calculator';
     } else {
         $_POST = array();
-        echo $errorMessage;
     } 
 ?>

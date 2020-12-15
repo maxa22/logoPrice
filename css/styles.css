@@ -1,13 +1,20 @@
 :root {
-  --four: #1c1c1c;
   --main-background: #f4f6f9;
-  --text-color: rgba(0, 0, 0, 0.5);
+  --nav-color: rgba(0, 0, 0, 0.5);
+  --text-color: #212529;
+  --nav-hover: rgba(0, 0, 0, 0.7);
   --sidebar: #343a40;
   --sidebar-text: #c2c7d0;
   --sidebar-border: #4f5962;
   --primary: #007bff;
+  --primary-hover: #0069d9;
+  --secondary: #6c757d;
   --info: #17a2b8;
   --info-hover: #138496;
+  --delete: #dc3545;
+  --delete-hover: #c82333;
+  --input-border: #ced4da;
+  --disabled: #e9ecef;
 }
 
 * {
@@ -41,11 +48,11 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 6rem;
+  padding: 0 7rem;
   margin: 0 auto;
 }
 .navigation__link.logo {
-  color: var(--text-color);
+  color: var(--nav-color);
   font-size: 2.5rem;
   padding: 0;
 }
@@ -57,11 +64,11 @@ header {
 .navigation__link:link {
   display: inline-block;
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--nav-color);
   padding: 2rem 2.5rem;
 }
 .navigation__link:hover {
-  color: rgba(0, 0, 0, 0.7);
+  color: var(--nav-hover);
 }
 
 /* ##### NAVIGATION END ##### */
@@ -86,6 +93,10 @@ header {
   border: none;
   color: #fff;
   text-transform: uppercase;
+  background-color: var(--primary);
+}
+.intro__button:hover {
+  background-color: var(--primary-hover);
 }
 .intro span {
   display: block;
@@ -115,11 +126,10 @@ input[type="radio"] {
 .option__label {
   cursor: pointer;
   height: 100%;
-  color: var(--four);
+  color: var(--text-color);
   display: block;
-  background: white;
-  border: 1px solid #ced4da;
-  border-radius: 1rem;
+  background: #fff;
+  border: 1px solid var(--input-border);
   padding: 1rem;
   margin-bottom: 1rem;
   text-align: center;
@@ -127,15 +137,17 @@ input[type="radio"] {
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 input[type="radio"]:checked + .option__label {
-  background: #6c757d;
+  background: var(--info);
   color: #fff;
 }
 input[type="radio"]:checked + .option__label::after {
-  color: hsla(215, 5%, 25%, 1);
   font-family: FontAwesome;
-  border: 2px solid #ced4da;
+  border: 2px solid var(--input-border);
   content: "\f00c";
+  background-color: white;
+  color: var(--info);
   font-size: 24px;
+  border-radius: 50%;
   position: absolute;
   top: -25px;
   left: 50%;
@@ -143,32 +155,29 @@ input[type="radio"]:checked + .option__label::after {
   height: 50px;
   width: 50px;
   line-height: 50px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0px 2px 5px -2px hsla(0, 0%, 0%, 0.25);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 .option__image {
   margin: 1rem 0;
-  height: 15rem;
-  width: 15rem;
+  height: auto;
+  width: 20rem;
 }
 
 form button {
   cursor: pointer;
-  border-radius: 1px;
   border: none;
   outline: none;
-  margin: 2rem 0;
+  margin: 1rem 0;
   padding: 1.25rem 3rem;
   text-transform: uppercase;
   font-weight: 700;
   color: #fff;
   transition: all 0.2s;
-  background-color: #1231fc;
+  background-color: var(--primary);
 }
 form button:hover,
 form button:focus {
-  background-color: #0069d9;
+  background-color: var(--primary-hover);
 }
 form button:active {
   transform: translateY(1px);
@@ -176,15 +185,29 @@ form button:active {
 /* ##### END INDEX FORM ##### */
 
 /* ##### REGISTRATION FORM ##### */
-.registration-form > div {
-  margin: 1.5rem 0;
+.form {
+  margin: 3rem auto 5rem;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
+  padding: 1.25rem;
+  position: relative;
 }
-.registration-form input {
+.form input {
   height: 5rem;
-  border: none;
-  border-radius: 1px;
+  width: 100%;
+  background-color: #fff;
+  color: #495057;
+  border: 1px solid var(--input-border);
   margin-top: 0.5rem;
   padding-left: 1rem;
+}
+.form input:disabled {
+  background-color: var(--disabled);
+  color: var(--secondary);
+}
+.form > div {
+  margin: 1.5rem 0;
 }
 .login {
   max-width: 45rem;
@@ -200,31 +223,7 @@ form button:active {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2rem;
 }
-.questionContainer span {
-  display: inline-block;
-  margin-top: 1rem;
-}
 
-.completed,
-.completed:link {
-  border-radius: 1px;
-  border: none;
-  margin: 2rem 0;
-  padding: 1.5rem 4rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  background-color: #3852ff;
-  color: #fff;
-  transition: all 0.2s;
-  text-decoration: none;
-}
-.completed:hover {
-  transform: translateY(-2px);
-  background-color: #1231fc;
-}
-.completed:active {
-  transform: translateY(1px);
-}
 /* ##### END CREATE CALCULATOR ##### */
 
 /* ##### ADMIN PANEL ##### */
@@ -234,7 +233,7 @@ form button:active {
 }
 #sidebar-toggle {
   cursor: pointer;
-  color: var(--text-color);
+  color: var(--nav-color);
 }
 .sidebar {
   position: absolute;
@@ -244,8 +243,8 @@ form button:active {
   width: 5rem;
   z-index: 5;
   overflow: hidden;
-  background-color: #343a40;
-  color: #c2c7d0;
+  background-color: var(--sidebar);
+  color: var(--sidebar-text);
   transition: all 0.3s;
 }
 .sidebar.active {
@@ -266,7 +265,7 @@ form button:active {
   display: flex;
   align-items: center;
   padding: 2rem 1rem;
-  border-bottom: 1px solid #4f5962;
+  border-bottom: 1px solid var(--sidebar-border);
   white-space: nowrap;
 }
 .sidebar__user h4 {
@@ -320,7 +319,7 @@ main {
 .calculator__wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 40px;
+  gap: 4rem;
 }
 
 .calculator {
@@ -356,57 +355,47 @@ main {
   text-decoration: none;
   width: 10rem;
   padding: 0.5rem;
-  border-radius: 1px;
   border: none;
   color: #fff;
 }
-.delete {
-  background-color: #dc3545;
+.delete,
+.delete:link,
+.delete:visited {
+  background-color: var(--delete);
 }
-.edit {
-  background-color: #17a2b8;
+.delete:hover {
+  background-color: var(--delete-hover);
+}
+.edit,
+.edit:link,
+.edit:visited {
+  background-color: var(--info);
+}
+.edit:hover {
+  background-color: var(--info-hover);
 }
 
 /* ##### EDIT CALCULATOR ##### */
 .main__heading {
   padding: 1.5rem 0;
   text-transform: capitalize;
-  color: #212529;
 }
-.form {
-  margin: 3rem auto 5rem;
-  width: 100%;
-  background-color: #fff;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
-  padding: 1.25rem;
-}
-.form input {
-  background-color: #fff;
-  color: #495057;
-  border: 1px solid #ced4da;
-  width: 100%;
-}
-.form input:disabled {
-  background-color: #e9ecef;
-  color: #495057;
-}
+
 .edit-icon {
-  color: #17a2b8;
+  color: var(--info);
   padding: 1rem;
   cursor: pointer;
 }
 .delete-icon {
-  color: #dc3545;
+  color: var(--delete);
   padding: 1rem;
 }
 .form label {
-  color: #212529;
   font-weight: 700;
   display: inline-block;
   margin-bottom: 1rem;
 }
 .form h3 {
-  color: #212529;
   margin-bottom: 1rem;
 }
 .form .edit-form__question-container {
@@ -426,7 +415,7 @@ main {
 }
 .edit-form__option {
   padding: 1.5rem 1rem;
-  border: 1px solid #ced4da;
+  border: 1px solid var(--input-border);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
   position: relative;
 }
@@ -453,12 +442,12 @@ main {
   display: inline-block;
   padding: 1.25rem 1.5rem;
   border-radius: 1px;
-  background-color: #17a2b8;
+  background-color: var(--primary);
   margin: 3rem 0;
   transition: all 0.2s;
 }
 #redirect-link:hover {
-  background-color: var(--info-hover);
+  background-color: var(--primary-hover);
 }
 .save {
   background-color: #28a745;
@@ -476,19 +465,35 @@ main {
 }
 .special {
   margin-left: 1rem;
-  background-color: #6c757d;
+  background-color: var(--secondary);
 }
 .special:hover,
 .special:focus {
   background-color: #5a6268;
 }
 .info {
-  color: #17a2b8;
+  color: var(--info);
   text-decoration: none;
 }
 .error {
   display: block;
-  color: #dc3545;
+  color: var(--delete);
+}
+.error__message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 0.75rem;
+}
+.success__message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 0.75rem;
+}
+#message {
+  position: absolute;
+  top: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 @media screen and (max-width: 85rem) {
   .navigation__link.desktop {

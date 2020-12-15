@@ -26,7 +26,7 @@
     <?php require_once('include/nav.php'); ?>
     <main>
         
-            <form action="" method="POST" class="registration-form form login">
+            <form action="" method="POST" class="form login">
             <div class="main__heading">
                 <h1>Register</h1>
             </div>

@@ -5,7 +5,7 @@
             <h1 class="intro__heading">How MUCH DOES A LOGO COST</h1>
             <p class="intro__paragraph">Have you ever wondered how much it would cost to make a logo? This handy logo &amp; branding cost calculator is just for you.
             Find out how much your design will cost in under a minute!</p>
-            <button class="intro__button save">Get started</button>
+            <button class="intro__button">Get started</button>
         </div>
         
             <?php
@@ -35,13 +35,13 @@
                     </div>
                 <?php } ?>
                 <div class="input-wrapper">
-                    <button name="submit" class="intro__button save">Get your price estimate</button>                     
+                    <button name="submit" class="intro__button">Get your price estimate</button>                     
                 </div>
                 </form>
                 
             <?php } else { ?>
                 <div class="input-wrapper">
-                    <p>No default calculator...</p>
+                    <p>No default calculator or no questions added to current calculator...</p>
                 </div>
 
 <?php } } ?>
