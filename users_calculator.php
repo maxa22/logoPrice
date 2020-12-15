@@ -28,9 +28,7 @@
                     <div class="calculator__wrapper">
                     <?php while($row = $calculators->fetch_assoc()) { ?>
                         <div class="calculator">
-                            <a href="<?php echo $row['id']; ?>" class="calculator__icon">
-                                <i class="fas fa-calculator"></i>
-                            </a>
+                            <img src="images/calculator.svg" alt="calculator" class="calculator__image">
                             <h3 class="calculator__heading">
                                 <a href="<?php echo $row['id']; ?>">
                                     <?php echo $row['calculatorName']; ?>
