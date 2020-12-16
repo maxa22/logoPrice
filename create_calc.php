@@ -16,7 +16,7 @@
         if(!validateCalculator($calculatorName)) {
             if( $id = createCalculator($conn, $calculatorName, $_SESSION['id'])) {
                 $_SESSION['calculator_id'] = $id;
-                header('Location: questions');
+                header('Location: questions.php');
                 exit();
             }
         } else {

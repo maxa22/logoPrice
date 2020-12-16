@@ -24,7 +24,7 @@
                 delete($conn, $calculator['id'], $query);
                 $query = "DELETE FROM calculator WHERE id = ?";
                 $error = delete($conn, $id, $query);
-                header('Location: ../admin');
+                header('Location: ../admin.php');
                 exit();
             }
         } else {

@@ -37,7 +37,6 @@
             $optionImage = $error == 4 ? '' : $directory . '/' . $fileName;
         }
         if(!$errorMessage) {
-            echo 'ovde';
             if($optionImage) {
                 move_uploaded_file($tempName, '../' . $directory . '/' . $fileName);
             }
