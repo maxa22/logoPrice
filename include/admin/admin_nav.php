@@ -8,9 +8,6 @@
                 <a href="admin.php" class="navigation__link">Dashboard</a>
             </li>
             <li>
-                <a href="users_calculator.php" class="navigation__link desktop">Your Calculators</a>
-            </li>
-            <li>
                 <a href="create_calc.php" class="navigation__link desktop">Create New Calculator</a>
             </li>
             <li>

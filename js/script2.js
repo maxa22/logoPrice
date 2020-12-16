@@ -11,15 +11,16 @@ addOption.addEventListener('click', e => {
                 <h3>Option ${optionCount}</h3>
                 <div>
                         <label for="name-${optionCount}">Answer</label>
-                        <input type="text" name="name${optionCount}" id="name-${optionCount}" placeholder="Answer">
+                        <input type="text" name="${optionCount}name" id="name-${optionCount}" placeholder="Answer">
                 </div>
                 <div>
                         <label for="price-${optionCount}">Price</label>
                         <input type="number" name="${optionCount}price" id="price-${optionCount}" placeholder="Price">
                 </div>
                 <div>
-                        <label for="url-${optionCount}">Image Url</label>
-                        <input type="text" name="url${optionCount}" id="url-${optionCount}" placeholder="Image url">
+                        <label for="url-${optionCount}" class="file__label">Upload Image</label>
+                        <input type="file" name="${optionCount}url" id="url-${optionCount}">
+                        <span></span>
                 </div>
         
         `
@@ -28,8 +29,23 @@ addOption.addEventListener('click', e => {
 
 const message = document.getElementById('message');
 
-setTimeout(hide, 2500 );
+setTimeout(hide, 3000 );
 
 function hide() {
         message.style.display= 'none';
 }
+const files = document.querySelectorAll('input[type="file"]');
+
+
+for(const file of files) {
+        file.addEventListener('change', () => {
+            const container = file.parentElement;
+            const span = container.querySelector('span');
+            const label = container.querySelector('label');
+            if(file.files.length > 0) {
+                span.innerHTML = file.files[0].name;
+                label.innerHTML = 'Image uploaded'
+            }
+        })
+    }
+    

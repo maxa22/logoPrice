@@ -15,6 +15,14 @@
             $error = 'Please provide valid email';
             return $error;
         }
+        $uppercase = preg_match('@[A-Z]@', $password);
+        $lowercase = preg_match('@[a-z]@', $password);
+        $number    = preg_match('@[0-9]@', $password);
+
+        if(!$uppercase || !$lowercase || !$number || strlen($password) < 6) {
+            $error = 'Password must be a minimum of 6 characters, must contain 1 number, 1 uppercase and 1 lowercase character';
+            return $error;
+        }
         if($password !== $confirmPassword) {
             $error = 'Passwords must match';
             return $error;
@@ -30,15 +38,16 @@
     function validateCalculator($calculatorName) { 
         $error = false;
         if(empty($calculatorName)) {
-            $error = 'Field can\'t be empty';
+            $error = 'Question and options fields can\'t be empty';
             return $error;
         }
         if(!preg_match('/^[a-z0-9A-Z\s\?]*$/', $calculatorName)) {
-            $error = 'Please provide valid full name';
+            $error = 'Please provide valid input, no special characters allowed';
             return $error;
         }
         return $error;
     }
+
     //validate price input
     function validateNumber($num) {
         if(!preg_match('/^[0-9]+$/', $num)) {
@@ -47,6 +56,25 @@
         }
         return false;
     }
+
+    //validate image upload
+    function validateFileUpload($k) {
+        require_once('file_upload_error_array.php');
+        $allowed = array('jpg', 'jpeg', 'png');
+        $tempExtension = explode('.', $_FILES[$k]['name']);
+        $extension = strtolower(end($tempExtension));
+        if(!in_array($extension, $allowed) && !empty($extension)) {
+            $errorMessage = 'Only png, jpg, jpeg image files are allowed';
+            return $errorMessage;
+        } else {
+            if($_FILES[$k]['error'] != 4 && $_FILES[$k]['error'] != 0) {
+                $errorMessage = $fileUploadError[ $_FILES[$k]['error']];
+                return $errorMessage;
+            }
+        }
+        return false;
+    }
+
     // checking if user exists
     function userExists($conn, $email) {
         $error = false;

@@ -16,17 +16,6 @@
             </a>
         </li>
         <li>
-            <a href="users_calculator.php" class="sidebar__menu-link">
-
-                <span>
-                    <span class="sidebar__menu-icon">
-                        <i class="fas fa-calculator"></i>
-                    </span>
-                </span>
-                <span  class="sidebar__menu-text">Your Calculators</span>
-            </a>
-        </li>
-        <li>
             <a href="create_calc.php" class="sidebar__menu-link">
                 <span>
                     <span class="sidebar__menu-icon">

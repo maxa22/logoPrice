@@ -34,7 +34,7 @@
     $stepResult = select($conn, $id, $query);
     if($stepResult->num_rows > 0) { 
     ?>
-    <form action="include/edit.inc.php" method="POST">
+    <form action="include/edit.inc.php" enctype="multipart/form-data" method="POST">
         <?php
             while($stepRow = $stepResult->fetch_assoc()) { ?>
             <div class="form" data-id="<?php echo $calculator['id'] . '-' . $stepRow['id']; ?>">
@@ -61,16 +61,17 @@
                         <div class="edit-form__option">
                             <h3>Option <?php echo ++$i; ?></h3>
                             <div>
-                                <label for="<?php echo $optionRow['id'] . '-' . $optionRow['optionName']; ?>">Name</label>
-                                <input type="text" disabled name="<?php echo $calculator['id'] . '-' . $optionRow['id'] . '-optionName'; ?>" id="<?php echo $optionRow['id'] . '-' . $optionRow['optionName']; ?>" value="<?php echo $optionRow['optionName']; ?>">
+                                <label for="<?php echo $optionRow['id'] . '-optionName'; ?>">Name</label>
+                                <input type="text" disabled name="<?php echo $calculator['id'] . '-' . $optionRow['id'] . '-optionName'; ?>" id="<?php echo $optionRow['id'] . '-optionName'; ?>" value="<?php echo $optionRow['optionName']; ?>">
                             </div>
                             <div>
-                                <label for="<?php echo $optionRow['id'] . '-' . $optionRow['optionName']; ?>">Price</label>
-                                <input type="text" disabled name="<?php echo $optionRow['id'] . '-optionPrice'; ?>" id="<?php echo $optionRow['id'] . '-' . $optionRow['optionName']; ?>" value="<?php echo $optionRow['optionPrice']; ?>">
+                                <label for="<?php echo $optionRow['id'] . '-' . $optionRow['optionPrice']; ?>">Price</label>
+                                <input type="text" disabled name="<?php echo $optionRow['id'] . '-optionPrice'; ?>" id="<?php echo $optionRow['id'] . '-optionPrice'; ?>" value="<?php echo $optionRow['optionPrice']; ?>">
                             </div>
                             <div>
-                                <label for="<?php echo $optionRow['id'] . '-' . $optionRow['optionName']; ?>">Image Url</label>
-                                <input type="text" disabled name="<?php echo $optionRow['id'] . '-optionImage'; ?>" id="<?php echo $optionRow['id'] . '-' . $optionRow['optionName']; ?>" value="<?php echo $optionRow['optionImage']; ?>">
+                                <label for="<?php echo $optionRow['id'] . '-optionImage'; ?>" class="file__label">Upload Image</label>
+                                <input type="file" disabled name="<?php echo $optionRow['id'] . '-optionImage'; ?>" id="<?php echo $optionRow['id'] . '-optionImage'; ?>" value="<?php echo $optionRow['optionImage']; ?>">
+                                <span></span>
                             </div>
                             <div class="edit-form__icons">
                                 <span class="edit-icon">

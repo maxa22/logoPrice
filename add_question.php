@@ -37,7 +37,7 @@
     <div class="main__heading">
         <h1>Add questions</h1>
     </div>
-    <form action="" method="POST" class="form">
+    <form action="" method="POST" enctype="multipart/form-data" class="form">
         <?php require_once('include/question_form.php'); ?>
         <div id="message">
         <?php if($successMessage) { ?>
