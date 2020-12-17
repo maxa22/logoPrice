@@ -1,6 +1,16 @@
 RewriteEngine On
 
-RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteCond %{SCRIPT_FILENAME} !-f
 
-RewriteRule ^([a-z0-9]+)$ calculator_redirect.php?id=$1
+RewriteRule ^([0-9a-zA-Z_]+)$ index.php?page=$1 [L]
+
+RewriteRule ^([a-zA-Z_]+)/([0-9a-zA-Z_]+)$ index.php?page=$1&id=$2 [L]
+
+#RewriteCond %{SCRIPT_FILENAME} !-d
+#RewriteCond %{SCRIPT_FILENAME} !-f
+
+#RewriteRule ^([0-9]+)$ calculator_redirect.php?id=$1 [L]
+
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+
+#RewriteRule ^(.*)$ index.php [L] 

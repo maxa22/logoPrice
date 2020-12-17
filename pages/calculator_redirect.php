@@ -9,12 +9,12 @@
             $query = "SELECT * FROM calculator WHERE id = ?";
             $calculator = selectOne($conn, $id, $query);
             if(!$calculator) {
-                header('Location: admin.php');
+                header('Location: calculators');
                 exit();
             }
         }
     } else {
-        header('Location: admin.php');
+        header('Location: calculators');
         exit();
     }
 ?>
@@ -26,9 +26,8 @@
     <?php require_once('include/nav.php'); ?>
     <?php require_once('include/render_calculator.php'); ?>
     <?php
-        $active = 'active';
         render_calculator($conn, $calculator['id']);
     ?>
-    <script src="js/script.js"></script>
+    <script src="<?php base(); ?>js/script.js"></script>
 </body>
 </html>

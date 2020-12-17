@@ -190,7 +190,7 @@ form button:active {
   width: 100%;
   background-color: #fff;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
-  padding: 1.25rem;
+  padding: 2rem;
   position: relative;
 }
 .form input {
@@ -219,8 +219,9 @@ form button:active {
 
 .calculator-option {
   margin: 1rem 0;
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
   gap: 2rem;
 }
 
@@ -414,7 +415,7 @@ main {
   display: none;
 }
 .edit-form__option {
-  padding: 1.5rem 1rem;
+  padding: 1.5rem 2rem;
   border: 1px solid var(--input-border);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
   position: relative;
@@ -427,7 +428,9 @@ main {
 .edit-form__option button {
   display: none;
 }
-
+.edit-form__option .edit-form__icons {
+  right: 1rem;
+}
 .active button {
   display: inline-block;
 }
@@ -450,18 +453,18 @@ main {
   background-color: var(--primary-hover);
 }
 .save {
-  background-color: #28a745;
+  background-color: var(--primary);
 }
 .save:hover,
 .save:focus {
-  background-color: #218838;
+  background-color: var(--primary-hover);
 }
 .cancel {
-  background-color: #ffc107;
+  background-color: var(--secondary);
 }
 .cancel:hover,
 .cancel:focus {
-  background-color: #e0a800;
+  background-color: #5a6268;
 }
 .special {
   margin-left: 1rem;
@@ -502,6 +505,15 @@ input[type="file"] {
   background-color: var(--info);
   color: #fff;
   padding: 1rem;
+  cursor: pointer;
+}
+.edit-buttons button {
+  width: 100%;
+  padding: 1.25rem 0;
+  margin: 0;
+}
+.edit-buttons button:not(.cancel) {
+  margin-bottom: 1rem;
 }
 @media screen and (max-width: 85rem) {
   .navigation__link.desktop {

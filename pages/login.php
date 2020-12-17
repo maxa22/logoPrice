@@ -1,5 +1,3 @@
-<!-- problem sa funckijom validateUserInput -->
-
 <?php
     require_once('include/db_connection.php');
     require_once('include/functions.inc.php');

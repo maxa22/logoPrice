@@ -5,13 +5,13 @@
             </div>
         <ul class="navigation__menu">
             <li>
-                <a href="admin.php" class="navigation__link">Dashboard</a>
+                <a href="<?php base(); ?>calculators" class="navigation__link">Dashboard</a>
             </li>
             <li>
-                <a href="create_calc.php" class="navigation__link desktop">Create New Calculator</a>
+                <a href="<?php base(); ?>create_calc" class="navigation__link desktop">Create New Calculator</a>
             </li>
             <li>
-                <a href="include/logout.inc.php" class="navigation__link">Logout</a>
+                <a href="<?php base(); ?>include/logout.inc.php" class="navigation__link">Logout</a>
             </li>
         </ul>
     </nav>

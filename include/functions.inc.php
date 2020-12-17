@@ -51,7 +51,7 @@
     //validate price input
     function validateNumber($num) {
         if(!preg_match('/^[0-9]+$/', $num)) {
-            $error = 'Please provide valid number';
+            $error = 'Please provide valid price';
             return $error;
         }
         return false;
@@ -61,16 +61,18 @@
     function validateFileUpload($k) {
         require_once('file_upload_error_array.php');
         $allowed = array('jpg', 'jpeg', 'png');
-        $tempExtension = explode('.', $_FILES[$k]['name']);
-        $extension = strtolower(end($tempExtension));
+        $extension = pathinfo($_FILES[$k]["name"], PATHINFO_EXTENSION);
         if(!in_array($extension, $allowed) && !empty($extension)) {
-            $errorMessage = 'Only png, jpg, jpeg image files are allowed';
+            $errorMessage = 'Sorry, only JPG, JPEG, PNG files are allowed.';
             return $errorMessage;
-        } else {
-            if($_FILES[$k]['error'] != 4 && $_FILES[$k]['error'] != 0) {
-                $errorMessage = $fileUploadError[ $_FILES[$k]['error']];
-                return $errorMessage;
-            }
+        } 
+        if($_FILES[$k]['error'] != 4 && $_FILES[$k]['error'] != 0) {
+            $errorMessage = $fileUploadError[ $_FILES[$k]['error']];
+            return $errorMessage;
+        }
+        if (($_FILES[$k]["size"] > 2000000)) {
+            $errorMessage = "Image size exceeds 2MB";
+            return $errorMessage;
         }
         return false;
     }
@@ -120,7 +122,7 @@
             session_start();
             $_SESSION['fullName'] = $user['fullName'];
             $_SESSION['id'] = $user['id'];
-            header('Location: admin.php?' . $user['fullName']);
+            header('Location: calculators');
             exit();
         } else {
             $error = 'Wrong email or password.';

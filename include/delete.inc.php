@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!$_SESSION['fullName']) {
-        header('Location: ../login.php');
+        header('Location: ../login');
         exit();
     }
     if(isset($_GET['id'])) {
@@ -16,6 +16,15 @@
                 $step = select($conn, $calculator['id'], $query);
                 if($step->num_rows > 0) {
                     while($row = $step->fetch_assoc()) {
+                        $query = "SELECT * FROM options WHERE step_id = ?";
+                        $result = select($conn, $row['id'], $query);
+                        if($result->num_rows > 0) {
+                            while($optionRow = $result->fetch_assoc()) {
+                                if($optionRow['optionImage']) {
+                                    unlink('../images/' . $optionRow['optionImage']);
+                                }
+                            }
+                        }
                         $query = "DELETE FROM options WHERE step_id = ?";
                         delete($conn, $row['id'], $query);
                     }
@@ -24,12 +33,12 @@
                 delete($conn, $calculator['id'], $query);
                 $query = "DELETE FROM calculator WHERE id = ?";
                 $error = delete($conn, $id, $query);
-                header('Location: ../admin.php');
+                header('Location: ../calculators');
                 exit();
             }
         } else {
-            header('Location: ../index.php');
+            header('Location: ../index');
         }
     } else {
-        header('Location: ../index.php');
+        header('Location: ../index');
     }

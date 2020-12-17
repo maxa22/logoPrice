@@ -3,7 +3,7 @@
     session_start();
     if(!isset($_SESSION['fullName'])) {
         session_unset();
-        header('Location: login.php');
+        header('Location: login');
         exit();
     }
     $errorMessage = '';
@@ -16,7 +16,7 @@
         if(!validateCalculator($calculatorName)) {
             if( $id = createCalculator($conn, $calculatorName, $_SESSION['id'])) {
                 $_SESSION['calculator_id'] = $id;
-                header('Location: questions.php');
+                header('Location: questions');
                 exit();
             }
         } else {

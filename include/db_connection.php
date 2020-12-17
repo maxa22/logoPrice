@@ -9,7 +9,7 @@
 
     // Check connection
     if ($conn->connect_error) {
-        header('Location: index.php?error=' . $conn->connect_error);
+        header('Location: index');
         exit();
     }
 ?>

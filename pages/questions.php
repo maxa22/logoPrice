@@ -2,7 +2,7 @@
 
     session_start();
     if(!isset($_SESSION['fullName'])) {
-        header('Location: login.php');
+        header('Location: login');
         exit();
     }
     $errorMessage = '';
@@ -10,7 +10,7 @@
     require_once('include/db_connection.php');
     require_once('include/functions.inc.php');
     if(isset($_POST['finish'])) {
-        header('Location: admin.php');
+        header('Location: calculators');
         exit();
     }
     if(isset($_POST['submit'])) {

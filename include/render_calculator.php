@@ -12,7 +12,7 @@
                 $query = "SELECT * FROM step WHERE calculator_id = ?";
                 $stepResult = select($conn, $calculator, $query);
                 if($stepResult->num_rows > 0) { ?>
-                <form action="estimate.php" method="POST">
+                <form action="<?php base(); ?>estimate" method="POST">
                 <?php while($stepRow = $stepResult->fetch_assoc()) { ?>
 
                     <div class="input-wrapper step-<?php echo $stepRow['id']; ?>">
@@ -26,7 +26,7 @@
                                 <div>
                                     <input type="radio" name="<?php echo $stepRow['id'] . '-answer'; ?>" id="<?php echo $optionRow['optionName']  . '-' . $stepRow['id']; ?> " value="<?php echo $stepRow['id'] . '-answer-' . $optionRow['id']; ?> ">
                                     <label for="<?php echo $optionRow['optionName'] . '-' . $stepRow['id']; ?> " class="option__label">
-                                        <img src="<?php echo $optionRow['optionImage'] ?>" alt="<?php echo $optionRow['optionName']; ?>" class="option__image">
+                                        <img src="<?php base(); ?>images/<?php echo $optionRow['optionImage'] ?>" alt="<?php echo $optionRow['optionName']; ?>" class="option__image">
                                         <p><?php echo $optionRow['optionName'] ?></p>
                                     </label>
                                 </div>
@@ -44,4 +44,4 @@
                     <p>No default calculator or no questions added to current calculator...</p>
                 </div>
 
-<?php } } ?>
+<?php } return false; } ?>

@@ -54,7 +54,7 @@ for(const addOption of addOptions) {
                     </div>
                     <div>
                             <label for="url-${optionCount}" class="file__label">Upload Image</label>
-                            <input type="file" name="${id}-url" id="url-${optionCount}">
+                            <input type="file" name="${id}-url" id="url-${optionCount}" class="new-option">
                             <span></span>
                     </div>
                     <button name="submit" class="save"> Save </button>
@@ -100,7 +100,7 @@ const fileLabels = document.querySelectorAll('.file__label');
 for(const file of files) {
         const container = file.parentElement;
         const span = container.querySelector('span');
-        const value = file.getAttribute('value').split('/')[1];
+        const value = file.getAttribute('value');
         const label = container.querySelector('label');
         if(value) {
             span.innerHTML = value;
@@ -118,3 +118,17 @@ for(const file of files) {
         }
     })
 }
+
+document.querySelector('.calculator-option').addEventListener('click', e => {
+    if(e.target.classList.contains('new-option')) {
+        e.target.addEventListener('change', () => {
+            const container = e.target.parentElement;
+            const span = container.querySelector('span');
+            const label = container.querySelector('label');
+            if(e.target.files.length > 0) {
+                span.innerHTML = e.target.files[0].name;
+                label.innerHTML = 'Image uploaded';
+        }
+        })
+    }
+});

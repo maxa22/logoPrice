@@ -2,7 +2,7 @@
 
     session_start();
     if(!isset($_SESSION['fullName'])) {
-        header('Location: index.php');
+        header('Location: login');
         exit();
     }
     if(isset($_GET['id'])){
@@ -12,17 +12,16 @@
         $query = "SELECT * FROM calculator WHERE id = ?";
         $calculator = selectOne($conn, $id, $query);
         if($calculator['user_id'] !== $_SESSION['id']) {
-            header('Location: index.php');
+            header('Location: index');
             exit();
         }
         $_SESSION['calculator_id'] = $calculator['id'];
     } else {
-        header('Location: admin.php');
+        header('Location: calculators');
     }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
 <?php require_once('include/head.php'); ?>
 <body>
     <?php require_once('include/admin/admin_nav.php'); ?>
@@ -34,7 +33,7 @@
     $stepResult = select($conn, $id, $query);
     if($stepResult->num_rows > 0) { 
     ?>
-    <form action="include/edit.inc.php" enctype="multipart/form-data" method="POST">
+    <form action="<?php base(); ?>include/edit.inc.php" enctype="multipart/form-data" method="POST">
         <?php
             while($stepRow = $stepResult->fetch_assoc()) { ?>
             <div class="form" data-id="<?php echo $calculator['id'] . '-' . $stepRow['id']; ?>">
@@ -45,7 +44,7 @@
                         <span class="edit-icon">
                             <i class="fas fa-edit"></i>
                         </span>
-                        <a href="include/delete_step.inc.php?calc_id=<?php echo $calculator['id'] . '&id=' . $stepRow['id']; ?>"" class="delete-icon">
+                        <a href="../include/delete_step.inc.php?calc_id=<?php echo $calculator['id'] . '&id=' . $stepRow['id']; ?>"" class="delete-icon">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </div>
@@ -77,12 +76,14 @@
                                 <span class="edit-icon">
                                     <i class="fas fa-edit"></i>
                                 </span>
-                                <a href="include/delete_option.inc.php?calc_id=<?php echo $calculator['id'] . '&id=' . $optionRow['id']; ?>" class="delete-icon">
+                                <a href="../include/delete_option.inc.php?calc_id=<?php echo $calculator['id'] . '&id=' . $optionRow['id']; ?>" class="delete-icon">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </div>
-                            <button class="save" name="saveOptions">Save</button>    
-                            <button class="cancel">Cancel</button>    
+                            <div class="edit-buttons">
+                                <button class="save" name="saveOptions">Save</button>
+                                <button class="cancel">Cancel</button>    
+                            </div>
                         </div>
                         <?php } ?>
                 </div>
@@ -95,9 +96,9 @@
         <p>Sorry, you don't have any questions in your calculator.</p>
     </div>
     <?php } ?>
-    <a href="add_question.php?id=<?php echo $id; ?>" id="redirect-link">Add question</a>
+    <a href="<?php base(); ?>add_question/<?php echo $id; ?>" id="redirect-link">Add question</a>
     </main>
-    <script src="js/sidebar.js"></script>
-    <script src="js/edit.js"></script>
+    <script src="<?php base(); ?>js/sidebar.js"></script>
+    <script src="<?php base(); ?>js/edit.js"></script>
 </body>
 </html>

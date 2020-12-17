@@ -11,7 +11,7 @@
 
         if(!validateUserInput($conn, $fullName, $email, $password, $confirmPassword)) {
             createUser($conn, $fullName, $email, $password);
-            header('Location: login.php');
+            header('Location: login');
         } else {
             $errorMessage = validateUserInput($conn, $fullName, $email, $password, $confirmPassword);
         }

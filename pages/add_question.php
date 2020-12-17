@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION['fullName'])) {
-        header('Location: login.php');
+        header('Location: login');
         exit();
     }
     $errorMessage = '';
@@ -17,7 +17,8 @@
 
     // return to calculator
     if(isset($_POST['finish'])) {
-        header('Location: edit.php?id=' . $calculatorId);
+        $base = str_replace('index.php', '',$_SERVER['PHP_SELF']);
+        header('Location: ' . $base . 'edit/' . $calculatorId);
         exit();
     }
 
@@ -25,10 +26,8 @@
     if(isset($_POST['submit'])) {
         require_once('include/create_question.inc.php');
      }
-
 ?>
 <!DOCTYPE html>
-<html lang="en">
 <?php require_once('include/head.php'); ?>
 <body>
     <?php require_once('include/admin/admin_nav.php'); ?>
@@ -50,7 +49,7 @@
         <button name="finish">done</a>
     </form>
 </main>
-<script src="js/script2.js"></script>
-<script src="js/sidebar.js"></script>
+<script src="<?php base(); ?>js/script2.js"></script>
+<script src="<?php base(); ?>js/sidebar.js"></script>
 </body>
 </html>
