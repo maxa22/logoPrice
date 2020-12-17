@@ -57,8 +57,10 @@ for(const addOption of addOptions) {
                             <input type="file" name="${id}-url" id="url-${optionCount}" class="new-option">
                             <span class="file__name"></span>
                     </div>
-                    <button name="submit" class="save"> Save </button>
-                    <button class="cancel addCancel"> Cancel </button>
+                    <div class="edit-buttons">
+                        <button name="submit" class="save"> Save </button>
+                        <button class="cancel addCancel"> Cancel </button>
+                    </div>
             `
             optionContainer.appendChild(optionDiv);
             disableInput();

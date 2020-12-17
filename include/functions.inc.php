@@ -38,11 +38,11 @@
     function validateCalculator($calculatorName) { 
         $error = false;
         if(empty($calculatorName)) {
-            $error = 'Question and options fields can\'t be empty';
+            $error = 'Question and option fields can\'t be empty';
             return $error;
         }
         if(!preg_match('/^[a-z0-9A-Z\s\?]*$/', $calculatorName)) {
-            $error = 'Please provide valid input, no special characters allowed';
+            $error = 'Please provide valid input, no special characters allowed in option and question fields';
             return $error;
         }
         return $error;

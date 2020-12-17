@@ -26,8 +26,12 @@
                                 <div>
                                     <input type="radio" name="<?php echo $stepRow['id'] . '-answer'; ?>" id="<?php echo $optionRow['optionName']  . '-' . $stepRow['id']; ?> " value="<?php echo $stepRow['id'] . '-answer-' . $optionRow['id']; ?> ">
                                     <label for="<?php echo $optionRow['optionName'] . '-' . $stepRow['id']; ?> " class="option__label">
-                                        <img src="<?php base(); ?>images/<?php echo $optionRow['optionImage'] ?>" alt="<?php echo $optionRow['optionName']; ?>" class="option__image">
-                                        <p><?php echo $optionRow['optionName'] ?></p>
+                                        <span class="option__image-container">
+                                            <?php if($optionRow['optionImage']) { ?>
+                                                <img src="<?php base(); ?>images/<?php echo $optionRow['optionImage'] ?>" alt="<?php echo $optionRow['optionName']; ?>" class="option__image">
+                                            <?php } ?>
+                                    </span>
+                                        <h3><?php echo $optionRow['optionName'] ?></h3>
                                     </label>
                                 </div>
                                 <?php } ?>

@@ -157,10 +157,20 @@ input[type="radio"]:checked + .option__label::after {
   line-height: 50px;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
 }
+.option__label h3 {
+  text-transform: uppercase;
+}
+.option__image-container {
+  min-height: 10rem;
+  overflow: hidden;
+  text-align: center;
+  display: grid;
+  place-items: center;
+}
 .option__image {
-  margin: 1rem 0;
   height: auto;
   width: 20rem;
+  display: block;
 }
 
 form button {
@@ -489,17 +499,20 @@ main {
   background-color: #f8d7da;
   color: #721c24;
   padding: 0.75rem;
+  display: inline-block;
 }
 .success__message {
   background-color: #d4edda;
   color: #155724;
   padding: 0.75rem;
+  display: inline-block;
 }
-#message {
+.message {
   position: absolute;
-  top: 1.75rem;
+  top: -4.5rem;
   left: 50%;
   transform: translateX(-50%);
+  margin: 0;
 }
 input[type="file"] {
   display: none;

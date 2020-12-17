@@ -30,7 +30,7 @@
     </div>
     <form action="" method="POST" enctype="multipart/form-data" class="form">
         <?php require_once('include/question_form.php'); ?>
-        <div id="message">
+        <div class="message">
             <?php if($successMessage) { ?>
                 <span class="success__message"><?php echo $successMessage ?? ''; ?></span>
             <?php } elseif ($errorMessage) { ?> 

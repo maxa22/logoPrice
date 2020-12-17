@@ -27,7 +27,7 @@ addOption.addEventListener('click', e => {
         optionContainer.appendChild(optionDiv);
 })
 
-const message = document.getElementById('message');
+const message = document.querySelector('.message');
 
 setTimeout(hide, 3000 );
 
