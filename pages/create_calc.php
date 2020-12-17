@@ -20,8 +20,7 @@
                 exit();
             }
         } else {
-            $errorMessage = validateCalculator($calculatorName);
-             echo $errorMessage;
+            $errorMessage = 'Fields can\'t be empty';
         }
     }
 ?>
@@ -44,9 +43,15 @@
             <textarea name="calculatorText" id="calculator-text" cols="30" rows="10" placeholder="What text to display the user on price estimate..."></textarea>
         </div>
         <button type="submit" type="submit">Submit</button>
+        <div class="message">
+            <?php if($errorMessage) { ?>
+                <span class="error__message"><?php echo $errorMessage ?? ''; ?></span>
+            <?php } ?>
+        </div>
     </form>
 </main>
 <script src="js/sidebar.js"></script>
+<script src="js/error_message.js"></script>
 </body>
 </html>
 

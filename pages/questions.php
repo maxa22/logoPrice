@@ -42,6 +42,7 @@
     </form>
 </main>
 <script src="js/script2.js"></script>
+<script src="js/error_message.js"></script>
 <script src="js/sidebar.js"></script>
 </body>
 </html>

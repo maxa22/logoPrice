@@ -27,15 +27,7 @@ addOption.addEventListener('click', e => {
         optionContainer.appendChild(optionDiv);
 })
 
-const message = document.querySelector('.message');
-
-setTimeout(hide, 3000 );
-
-function hide() {
-        message.style.display= 'none';
-}
 const files = document.querySelectorAll('input[type="file"]');
-
 
 for(const file of files) {
         file.addEventListener('change', () => {
