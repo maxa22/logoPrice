@@ -20,7 +20,7 @@ addOption.addEventListener('click', e => {
                 <div>
                         <label for="url-${optionCount}" class="file__label">Upload Image</label>
                         <input type="file" name="${optionCount}url" id="url-${optionCount}" class="new-option">
-                        <span></span>
+                        <span class="file__name"></span>
                 </div>
         
         `

@@ -1,7 +1,7 @@
 <?php
 
 /*** Function for loading the page ***/
-function load_page($page, $data = null){
+function load_page($page){
     // Check is page empty. If it is, load the default page
     if($page === ''){
         require 'pages/index.php';
@@ -20,13 +20,7 @@ function load_page($page, $data = null){
         case 'estimate':
         case 'calculator_redirect':
             require 'pages/' . $page . '.php';
-        break;
-        case range(1,10000):
-            require 'pages/calculator_redirect.php';
-        break;
-        // case preg_match('/[\d]+/', $page):
-        //     require 'pages/calculator_redirect.php';
-        // break;     
+        break;  
         default:
             // Load index by default
             require 'pages/index.php';
@@ -36,10 +30,8 @@ function load_page($page, $data = null){
 
     if(isset($_GET['page']) && !empty($_GET['page'])){
 
-    /*** Get the third argument ***/
-    @$data = $_GET['data'];
 
     /*** Call loading function from includes/functions.php ***/
-    load_page($_GET['page'], $data);
+    load_page($_GET['page']);
     }
 ?>

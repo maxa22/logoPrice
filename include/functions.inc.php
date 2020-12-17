@@ -130,13 +130,13 @@
         }
     }
     //creating calculator name
-    function createCalculator($conn, $name, $id) {
+    function createCalculator($conn, $name, $text, $id) {
         $stmt = $conn->stmt_init();
-        if(!$stmt->prepare("INSERT INTO calculator (calculatorName, user_id) VALUES (?, ?)")) {
+        if(!$stmt->prepare("INSERT INTO calculator (calculatorName, calculatorText, user_id) VALUES (?, ?, ?)")) {
             $error = 'Error';
             return $error;
         }
-        $stmt->bind_param('ss', $name, $id);
+        $stmt->bind_param('sss', $name, $text, $id);
         $stmt->execute();
         return $stmt->insert_id;
     }

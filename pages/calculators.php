@@ -28,7 +28,7 @@
                 <div class="calculator">
                     <img src="images/calculator.svg" alt="calculator" class="calculator__image">
                     <h3 class="calculator__heading">
-                        <a href="<?php echo $row['id']; ?>">
+                        <a href="<?php echo 'calculator_redirect/' .  $row['id']; ?>">
                             <?php echo $row['calculatorName']; ?>
                         </a>
                     </h3>

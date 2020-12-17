@@ -20,11 +20,11 @@
         setcookie('price', $price, time() + (86400 * 30));
     }
     }
-    //updating all the stepStatus field of the used steps
+    //updating all the stepStatus fields from used steps
     $query = "UPDATE step SET stepStatus = '1' WHERE id = ?";
     $stmt = $conn->stmt_init();
     if(!$stmt -> prepare($query)) {
-        header('Location: ../edit.php?id=' . $calc_id . '&error=stmtError');
+        header('Location: edit/' . $calc_id . '&error=stmtError');
         exit();
     } else {
         foreach($_POST as $k => $v) {
@@ -41,7 +41,7 @@
     $query = "UPDATE options SET optionStatus = '1' WHERE id = ?";
     $stmt = $conn->stmt_init();
     if(!$stmt -> prepare($query)) {
-        header('Location: ../edit.php?id=' . $calc_id . '&error=stmtError');
+        header('Location: edit/' . $calc_id . '&error=stmtError');
         exit();
     } else {
         foreach($_POST as $k => $v) {
@@ -53,6 +53,12 @@
         }
         $stmt->close();
     }
+
+    //selecting the calculator text that the user provided
+    $query = "SELECT * FROM step WHERE id = ?";
+    $step = selectOne($conn, $stepId, $query);
+    $query = "SELECT * FROM calculator WHERE id = ?";
+    $calculator = selectOne($conn, $step['calculator_id'], $query);
     
 ?>
 
@@ -63,6 +69,7 @@
     <?php require_once('include/nav.php'); ?>
     <div class="intro form">
         <h1 class="intro__heading">your  estimate <span><?php echo $_COOKIE['price']; ?>BAM</span></h1>
+        <p><?php echo $calculator['calculatorText']; ?></p>
     </div>
 
 </body>

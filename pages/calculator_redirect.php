@@ -24,10 +24,12 @@
 <?php require_once('include/head.php'); ?>
 <body>
     <?php require_once('include/nav.php'); ?>
+<main>
     <?php require_once('include/render_calculator.php'); ?>
     <?php
         render_calculator($conn, $calculator['id']);
     ?>
+</main>
     <script src="<?php base(); ?>js/script.js"></script>
 </body>
 </html>

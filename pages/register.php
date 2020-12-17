@@ -4,10 +4,10 @@
     $errorMessage = '';
     if(isset($_POST['submit'])) {
         
-        $fullName = trim($_POST['fullName']);
-        $email = trim($_POST['email']);
-        $password = trim( $_POST['password']);
-        $confirmPassword = trim( $_POST['confirmPassword']);
+        $fullName = htmlspecialchars($_POST['fullName']);
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars( $_POST['password']);
+        $confirmPassword = htmlspecialchars( $_POST['confirmPassword']);
 
         if(!validateUserInput($conn, $fullName, $email, $password, $confirmPassword)) {
             createUser($conn, $fullName, $email, $password);

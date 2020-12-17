@@ -4,8 +4,8 @@
     $errorMessage = '';
     if(isset($_POST['submit'])) {
 
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
 
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errorMessage = 'Please provide valid email';

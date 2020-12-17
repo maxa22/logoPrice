@@ -10,11 +10,11 @@
     require_once('include/db_connection.php');
     require_once('include/functions.inc.php');
     if(isset($_POST['calculatorName'])) {
-        $calculatorName = trim($_POST['calculatorName']);
-        
+        $calculatorName = htmlspecialchars($_POST['calculatorName']);
+        $calculatorText = htmlspecialchars($_POST['calculatorText']);
         //performing check of user input and storing the calculator name in SESSION
-        if(!validateCalculator($calculatorName)) {
-            if( $id = createCalculator($conn, $calculatorName, $_SESSION['id'])) {
+        if(!validateCalculator($calculatorName) && !validateCalculator($calculatorText)) {
+            if( $id = createCalculator($conn, $calculatorName, $calculatorText, $_SESSION['id'])) {
                 $_SESSION['calculator_id'] = $id;
                 header('Location: questions');
                 exit();
@@ -39,6 +39,9 @@
         <div>
             <label for="calculator-name">Calculator Name:</label><br>
             <input type="text" name="calculatorName" id="calculator-name">
+        </div>
+        <div>
+            <textarea name="calculatorText" id="calculator-text" cols="30" rows="10" placeholder="What text to display the user on price estimate..."></textarea>
         </div>
         <button type="submit" type="submit">Submit</button>
     </form>

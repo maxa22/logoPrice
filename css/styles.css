@@ -346,6 +346,9 @@ main {
   text-decoration: none;
   color: var(--text-color);
 }
+.calculator__heading a:hover {
+  color: var(--secondary);
+}
 .calculator__date {
   display: block;
   margin-bottom: 3rem;
@@ -507,6 +510,9 @@ input[type="file"] {
   padding: 1rem;
   cursor: pointer;
 }
+.file__name {
+  display: block;
+}
 .edit-buttons button {
   width: 100%;
   padding: 1.25rem 0;
@@ -514,6 +520,10 @@ input[type="file"] {
 }
 .edit-buttons button:not(.cancel) {
   margin-bottom: 1rem;
+}
+#calculator-text {
+  width: 100%;
+  padding: 2rem 1rem;
 }
 @media screen and (max-width: 85rem) {
   .navigation__link.desktop {

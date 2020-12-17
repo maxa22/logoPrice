@@ -55,7 +55,7 @@ for(const addOption of addOptions) {
                     <div>
                             <label for="url-${optionCount}" class="file__label">Upload Image</label>
                             <input type="file" name="${id}-url" id="url-${optionCount}" class="new-option">
-                            <span></span>
+                            <span class="file__name"></span>
                     </div>
                     <button name="submit" class="save"> Save </button>
                     <button class="cancel addCancel"> Cancel </button>

@@ -55,7 +55,7 @@
                     $stmt->bind_param('ssss', $optionName, $optionPrice, $optionImage, $id);
                     $stmt->execute();
                     $stmt->close();
-                    // header('Location: ../edit/' . $calc_id);
+                    header('Location: ../edit/' . $calc_id);
                 }
 
         } else {

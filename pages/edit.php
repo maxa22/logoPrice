@@ -70,7 +70,7 @@
                             <div>
                                 <label for="<?php echo $optionRow['id'] . '-optionImage'; ?>" class="file__label">Upload Image</label>
                                 <input type="file" disabled name="<?php echo $optionRow['id'] . '-optionImage'; ?>" id="<?php echo $optionRow['id'] . '-optionImage'; ?>" value="<?php echo $optionRow['optionImage']; ?>">
-                                <span></span>
+                                <span class="file__name"></span>
                             </div>
                             <div class="edit-form__icons">
                                 <span class="edit-icon">
