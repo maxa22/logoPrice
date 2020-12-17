@@ -69,6 +69,8 @@
     <?php require_once('include/nav.php'); ?>
     <div class="intro form">
         <h1 class="intro__heading">your  estimate <span><?php echo $_COOKIE['price']; ?>BAM</span></h1>
+    </div>
+    <div class="intro form">
         <p><?php echo $calculator['calculatorText']; ?></p>
     </div>
 
