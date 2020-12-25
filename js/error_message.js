@@ -1,4 +1,4 @@
-
+// hiding error messages after 3s
 const message = document.querySelector('.message');
 
 setTimeout(hide, 3000 );

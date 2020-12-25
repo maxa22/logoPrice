@@ -1,3 +1,4 @@
+// toggle sidebar
 const toggle = document.getElementById('sidebar-toggle');
 const sidebar = document.getElementsByClassName('sidebar')[0];
 const sidebarOverlay = document.getElementsByClassName('sidebar-overlay')[0];

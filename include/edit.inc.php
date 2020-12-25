@@ -1,3 +1,13 @@
+<!-- 
+    - updating and adding steps and options for a specific calculator
+    - check the POST array for saveOptions, submit or saveQuestion keys
+    ### saveOption ###
+    - updating options table with updated data
+    ### submit ###
+    - adding new option to options table
+    ### saveQuestion ###
+    - updating question table with updated data
+ -->
 <?php 
     session_start();
     if(!isset($_SESSION['fullName'])) {

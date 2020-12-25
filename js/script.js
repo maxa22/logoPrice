@@ -1,3 +1,4 @@
+// displaying new question from calculator and scrolling to it
 const divs = document.querySelectorAll('.input-wrapper');
 const inputs = document.querySelectorAll('input[type="radio"]');
 const startBtn = document.querySelector('.intro .intro__button');

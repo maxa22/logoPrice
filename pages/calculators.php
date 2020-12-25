@@ -1,3 +1,4 @@
+<!--  rendering user calculators -->
 <?php
     session_start();
     if(!isset($_SESSION['fullName'])) {
@@ -31,10 +32,15 @@
                         <a href="<?php echo 'calculator_redirect/' .  $row['id']; ?>">
                             <?php echo $row['calculatorName']; ?>
                         </a>
+                        <span class="calculator__span">Click on calculator name to preview</span>
                     </h3>
                     <span class="calculator__date">Created: <?php $time = strtotime($row['date']); echo date('d-m-Y H:i', $time) ; ?></span>
                     <a href="edit/<?php echo $row['id']; ?>" class="calculator__btn edit">Edit</a>
                     <a href="include/delete.inc.php?id=<?php echo $row['id']; ?>" class="calculator__btn delete">Delete</a>
+                <div class="iframe">
+                    <input type="text" class="iframe__text" value="<iframe src='<?php base(); echo 'calculator_redirect/' .  $row['id']; ?>' title='Calculator iframe'></iframe>">
+                    <button class="iframe__copy">Copy iframe</button>
+                </div>
                 </div>
         <?php } ?>
             </div>
@@ -45,5 +51,6 @@
     </div>
     </main>
     <script src="js/sidebar.js"></script>
+    <script src="js/copy.js"></script>
 </body>
 </html>

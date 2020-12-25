@@ -1,3 +1,9 @@
+// add new option to question on edit page
+// when user selects option or question field to update hide edit and delete icons from other fields
+// so the user can update only one field at a time
+// selected field shows save and cancel button, so user can save the change
+// check if user updated image in file input and change the label and span text
+
 const editbtns = document.querySelectorAll('.form .edit-icon');
 const calcelBtns = document.querySelectorAll('.cancel');
 const options = document.querySelectorAll('.edit-form__option');

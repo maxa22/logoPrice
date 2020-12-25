@@ -1,3 +1,5 @@
+// add new option to question on add_question page
+// check if user uploaded image and change label and span text
 const addOption = document.querySelector('.add-option');
 
 addOption.addEventListener('click', e => {

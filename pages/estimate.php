@@ -1,3 +1,8 @@
+<!-- 
+    - calculating the price of the options choosen by the user
+    - updating status of the step, and status of the choosen option in matching database tables and rows
+    - storing the price in a cookie and displaying it to user
+ -->
 <?php
     session_start();
     if(isset($_POST['submit'])) {
@@ -68,10 +73,7 @@
 <body>
     <?php require_once('include/nav.php'); ?>
     <div class="intro form">
-        <h1 class="intro__heading">your  estimate <span><?php echo $_COOKIE['price']; ?>BAM</span></h1>
-    </div>
-    <div class="intro form">
-        <p><?php echo $calculator['calculatorText']; ?></p>
+        <h1 class="intro__heading">your  estimate <span><?php echo $_COOKIE['price'] . ' ' . $calculator['currency'] ?></span></h1>
     </div>
 
 </body>

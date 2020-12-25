@@ -1,3 +1,4 @@
+<!--  getting the id of the calculator to render the steps and options  -->
 <?php
 
     session_start();

@@ -1,3 +1,4 @@
+<!-- form for creating new question and options -->
 <div class="questionContainer">
     <div>
         <label for="question">Your question</label><br>

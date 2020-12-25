@@ -1,3 +1,4 @@
+<!-- including the create_question to save user input to matching table in database, and we include the question_form -->
 <?php
     session_start();
     if(!isset($_SESSION['fullName'])) {

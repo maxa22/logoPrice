@@ -1,3 +1,6 @@
+<!-- 
+    the file includes create_question for storing provided data and question_form for providing the data 
+-->
 <?php
 
     session_start();

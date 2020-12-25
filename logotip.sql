@@ -15,20 +15,23 @@
 CREATE TABLE IF NOT EXISTS `calculator` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `calculatorName` varchar(150) NOT NULL DEFAULT '0',
+  `heading` varchar(50) NOT NULL,
   `calculatorText` text NOT NULL,
+  `button` varchar(50) NOT NULL,
+  `logo` varchar(50) NOT NULL,
+  `currency` varchar(50) NOT NULL,
   `optionStatus` set('0','1') NOT NULL DEFAULT '0',
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user` (`user_id`),
   CONSTRAINT `user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table logotip.calculator: ~2 rows (approximately)
 /*!40000 ALTER TABLE `calculator` DISABLE KEYS */;
-INSERT INTO `calculator` (`id`, `calculatorName`, `calculatorText`, `optionStatus`, `date`, `user_id`) VALUES
-	(1, 'default_calculator', 'Contact us', '0', '2020-12-17 17:25:24', 1),
-	(2, 'another calculator', 'dva', '0', '2020-12-22 18:29:48', 2);
+INSERT INTO `calculator` (`id`, `calculatorName`, `heading`, `calculatorText`, `button`, `logo`, `currency`, `optionStatus`, `date`, `user_id`) VALUES
+	(1, 'default_calculator', 'How MUCH DOES A LOGO COST', 'Have you ever wondered how much it would cost to make a logo? This handy logo &amp; branding cost calculator is just for you.', 'Get started', '', 'BAM', '0', '2020-12-23 18:46:44', 1);
 /*!40000 ALTER TABLE `calculator` ENABLE KEYS */;
 
 -- Dumping structure for table logotip.options
@@ -43,9 +46,9 @@ CREATE TABLE IF NOT EXISTS `options` (
   PRIMARY KEY (`id`),
   KEY `step` (`step_id`),
   CONSTRAINT `step` FOREIGN KEY (`step_id`) REFERENCES `step` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
--- Dumping data for table logotip.options: ~16 rows (approximately)
+-- Dumping data for table logotip.options: ~14 rows (approximately)
 /*!40000 ALTER TABLE `options` DISABLE KEYS */;
 INSERT INTO `options` (`id`, `optionName`, `optionPrice`, `optionImage`, `optionStatus`, `date`, `step_id`) VALUES
 	(1, 'Symbol or icon', '50', 'default.png', '1', '2020-12-17 14:35:27', 1),
@@ -61,9 +64,7 @@ INSERT INTO `options` (`id`, `optionName`, `optionPrice`, `optionImage`, `option
 	(11, 'Business card', '50', 'default.png', '1', '2020-12-17 14:35:55', 5),
 	(12, 'Stickers', '50', 'default.png', '1', '2020-12-17 14:35:57', 5),
 	(13, 'Both', '100', 'default.png', '0', '2020-12-17 14:35:58', 5),
-	(14, 'No', '0', 'default.png', '1', '2020-12-17 14:35:59', 5),
-	(15, 'da', '10', '', '0', '2020-12-22 18:29:57', 6),
-	(16, 'ne', '2', '', '1', '2020-12-22 18:33:44', 6);
+	(14, 'No', '0', 'default.png', '1', '2020-12-17 14:35:59', 5);
 /*!40000 ALTER TABLE `options` ENABLE KEYS */;
 
 -- Dumping structure for table logotip.step
@@ -76,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `step` (
   PRIMARY KEY (`id`),
   KEY `calculator` (`calculator_id`),
   CONSTRAINT `calculator` FOREIGN KEY (`calculator_id`) REFERENCES `calculator` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table logotip.step: ~6 rows (approximately)
 /*!40000 ALTER TABLE `step` DISABLE KEYS */;
@@ -85,8 +86,7 @@ INSERT INTO `step` (`id`, `stepName`, `stepStatus`, `date`, `calculator_id`) VAL
 	(2, 'What styles are you looking for?', '1', '2020-12-14 15:11:13', 1),
 	(3, 'Do you have a color scheme for your company?', '1', '2020-12-14 15:11:13', 1),
 	(4, 'Do you need a brand icon?', '1', '2020-12-14 15:11:13', 1),
-	(5, 'Would you like additional assets created with your logo?', '1', '2020-12-14 15:11:13', 1),
-	(6, 'Da li zelite sa ili bez slike?', '1', '2020-12-22 18:33:44', 2);
+	(5, 'Would you like additional assets created with your logo?', '1', '2020-12-14 15:11:13', 1);
 /*!40000 ALTER TABLE `step` ENABLE KEYS */;
 
 -- Dumping structure for table logotip.user
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table logotip.user: ~2 rows (approximately)
+-- Dumping data for table logotip.user: ~0 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `fullName`, `userEmail`, `userPassword`, `userStatus`, `date`) VALUES
 	(1, 'Mladen', 'mldnmldn@gmail.com', 'dvadva', '0', '2020-12-10 22:25:47'),

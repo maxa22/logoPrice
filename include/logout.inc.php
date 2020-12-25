@@ -1,3 +1,4 @@
+<!-- login user out, unseting session and redirecting user to index -->
 <?php
     session_start();
     session_unset();

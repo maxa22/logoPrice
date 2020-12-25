@@ -51,6 +51,7 @@ h4 {
 
 header {
   background-color: #fff;
+  border-bottom: 1px solid #dee2e6;
 }
 .navigation {
   display: -webkit-box;
@@ -65,7 +66,8 @@ header {
   padding: 0 7rem;
   margin: 0 auto;
 }
-.navigation__link.logo {
+.navigation__link.logo,
+.navigation__link.logo:link {
   color: var(--nav-color);
   font-size: 2.5rem;
   padding: 0;
@@ -89,6 +91,41 @@ header {
 
 /* ##### NAVIGATION END ##### */
 
+/* ##### HEADER ##### */
+
+.hero {
+  height: calc(100vh - 6.9rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 7rem;
+  margin: 0 auto;
+}
+.hero__text,
+.hero__image {
+  width: 40%;
+}
+.hero__text h1 {
+  font-weight: 700;
+  font-size: 4rem;
+  color: #363d47;
+}
+.hero__text p {
+  margin: 1rem 0 4.8rem;
+  font-size: 1.85rem;
+  color: #69707a;
+}
+.hero .intro__button {
+  text-transform: none;
+}
+.hero__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ##### HEADER END ##### */
+
 /* ##### INDEX PAGE ##### */
 
 .intro {
@@ -110,12 +147,19 @@ header {
   color: #fff;
   text-transform: uppercase;
   background-color: var(--primary);
+  text-decoration: none;
 }
 .intro__button:hover {
   background-color: var(--primary-hover);
 }
 .intro span {
   display: block;
+}
+.intro__logo img {
+  width: 95%;
+  max-width: 36rem;
+  display: block;
+  margin: 4rem auto 0;
 }
 /* ##### INDEX FORM  ##### */
 
@@ -232,8 +276,9 @@ form button:active {
   padding: 2rem;
   position: relative;
 }
-.form input {
-  height: 5rem;
+.form input,
+select {
+  height: 4rem;
   width: 100%;
   background-color: #fff;
   color: #495057;
@@ -279,7 +324,7 @@ form button:active {
   color: var(--nav-color);
 }
 .sidebar {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
@@ -365,7 +410,7 @@ form button:active {
 }
 
 main {
-  padding: 0 7rem;
+  padding: 1rem 7rem;
 }
 /* ##### END OF ADMIN PANEL ##### */
 
@@ -405,6 +450,12 @@ main {
 .calculator__heading a:hover {
   color: var(--secondary);
 }
+.calculator__span {
+  display: block;
+  margin: 1rem 0;
+  text-transform: none;
+  font-size: 80%;
+}
 .calculator__date {
   display: block;
   margin-bottom: 3rem;
@@ -412,9 +463,10 @@ main {
 
 .calculator__btn {
   display: inline-block;
-  text-decoration: none;
   width: 10rem;
-  padding: 0.5rem;
+  height: 3.5rem;
+  text-decoration: none;
+  line-height: 3.5rem;
   border: none;
   color: #fff;
 }
@@ -422,6 +474,7 @@ main {
 .delete:link,
 .delete:visited {
   background-color: var(--delete);
+  width: 48%;
 }
 .delete:hover {
   background-color: var(--delete-hover);
@@ -430,9 +483,37 @@ main {
 .edit:link,
 .edit:visited {
   background-color: var(--info);
+  margin-right: 2%;
+  width: 48%;
 }
 .edit:hover {
   background-color: var(--info-hover);
+}
+
+.iframe {
+  margin-top: 2rem;
+}
+.iframe__text,
+.iframe__copy {
+  width: 100%;
+  height: 3.5rem;
+  padding: 0.5rem 1.25rem;
+}
+.iframe__text {
+  color: #495057;
+  border: 1px solid #ced4da;
+  margin-bottom: 1rem;
+  outline: none;
+}
+.iframe__copy {
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+.iframe__copy:hover {
+  background-color: var(--primary-hover);
 }
 
 /* ##### EDIT CALCULATOR ##### */
@@ -574,6 +655,9 @@ input[type="file"] {
   padding: 1rem;
   cursor: pointer;
 }
+form .calculator__label {
+  margin-bottom: 0;
+}
 .file__name {
   display: block;
 }
@@ -596,6 +680,17 @@ input[type="file"] {
   .edit-form__option {
     width: 17rem;
   }
+  .hero__image {
+    display: none;
+  }
+  .hero__text {
+    width: unset;
+    max-width: 54rem;
+    text-align: center;
+  }
+  .hero {
+    justify-content: center;
+  }
 }
 @media screen and (max-width: 550px) {
   .navigation-admin,
@@ -604,6 +699,10 @@ input[type="file"] {
     padding: 0;
     width: 95%;
     margin: 0 auto;
+  }
+  .hero {
+    width: 95%;
+    padding: 0;
   }
   .sidebar {
     width: 0;

@@ -1,3 +1,7 @@
+<!-- delete step and options selected from user from database
+    ## functions ##
+    * select - takes three arguments: connection, id, query. Returns every matching row from table provided by query
+ -->
 <?php
     session_start();
     if(!$_SESSION['fullName']) {

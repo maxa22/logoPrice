@@ -1,5 +1,4 @@
 <?php
-
 /*** Function for loading the page ***/
 function load_page($page){
     // Check is page empty. If it is, load the default page
@@ -30,8 +29,6 @@ function load_page($page){
 
     if(isset($_GET['page']) && !empty($_GET['page'])){
 
-
-    /*** Call loading function from includes/functions.php ***/
     load_page($_GET['page']);
     }
 ?>

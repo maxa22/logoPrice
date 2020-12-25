@@ -1,3 +1,8 @@
+<!-- delete calculator, questions and options that belong to the calculator 
+    ## functions ##
+    * select - takes three arguments: connection, id, query. Returns every matching row from table provided by query
+    * unlink - removes image file from images folder
+-->
 <?php
     session_start();
     if(!$_SESSION['fullName']) {
@@ -32,6 +37,9 @@
                 $query = "DELETE FROM step WHERE calculator_id = ?";
                 delete($conn, $calculator['id'], $query);
                 $query = "DELETE FROM calculator WHERE id = ?";
+                if($calculator['logo']) {
+                    unlink('../images/calculator_logo/' . $calculator['logo']);
+                }
                 $error = delete($conn, $id, $query);
                 header('Location: ../calculators');
                 exit();
