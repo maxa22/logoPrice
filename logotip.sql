@@ -15,23 +15,28 @@
 CREATE TABLE IF NOT EXISTS `calculator` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `calculatorName` varchar(150) NOT NULL DEFAULT '0',
-  `heading` varchar(50) NOT NULL,
+  `estimateText` text NOT NULL,
+  `heading` varchar(250) NOT NULL,
   `calculatorText` text NOT NULL,
   `button` varchar(50) NOT NULL,
   `logo` varchar(50) NOT NULL,
   `currency` varchar(50) NOT NULL,
-  `optionStatus` set('0','1') NOT NULL DEFAULT '0',
+  `backgroundColor` varchar(50) NOT NULL DEFAULT '0',
+  `color` varchar(50) NOT NULL DEFAULT '0',
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `optionStatus` set('0','1') NOT NULL DEFAULT '0',
+  `archived` set('0','1') NOT NULL DEFAULT '0',
+  `defaultCalculators` set('0','1') NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user` (`user_id`),
   CONSTRAINT `user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Dumping data for table logotip.calculator: ~2 rows (approximately)
+-- Dumping data for table logotip.calculator: ~6 rows (approximately)
 /*!40000 ALTER TABLE `calculator` DISABLE KEYS */;
-INSERT INTO `calculator` (`id`, `calculatorName`, `heading`, `calculatorText`, `button`, `logo`, `currency`, `optionStatus`, `date`, `user_id`) VALUES
-	(1, 'default_calculator', 'How MUCH DOES A LOGO COST', 'Have you ever wondered how much it would cost to make a logo? This handy logo &amp; branding cost calculator is just for you.', 'Get started', '', 'BAM', '0', '2020-12-23 18:46:44', 1);
+INSERT INTO `calculator` (`id`, `calculatorName`, `estimateText`, `heading`, `calculatorText`, `button`, `logo`, `currency`, `backgroundColor`, `color`, `date`, `optionStatus`, `archived`, `defaultCalculators`, `user_id`) VALUES
+	(1, 'default_calculator', '', 'How MUCH DOES A LOGO COST', 'Have you ever wondered how much it would cost to make a logo? This handy logo &amp; branding cost calculator is just for you.', 'Get started', '', 'BAM', 'f4f6f9', '212529', '2020-12-27 22:03:34', '0', '0', '1', 1);
 /*!40000 ALTER TABLE `calculator` ENABLE KEYS */;
 
 -- Dumping structure for table logotip.options
@@ -46,9 +51,9 @@ CREATE TABLE IF NOT EXISTS `options` (
   PRIMARY KEY (`id`),
   KEY `step` (`step_id`),
   CONSTRAINT `step` FOREIGN KEY (`step_id`) REFERENCES `step` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
--- Dumping data for table logotip.options: ~14 rows (approximately)
+-- Dumping data for table logotip.options: ~25 rows (approximately)
 /*!40000 ALTER TABLE `options` DISABLE KEYS */;
 INSERT INTO `options` (`id`, `optionName`, `optionPrice`, `optionImage`, `optionStatus`, `date`, `step_id`) VALUES
 	(1, 'Symbol or icon', '50', 'default.png', '1', '2020-12-17 14:35:27', 1),
@@ -77,9 +82,9 @@ CREATE TABLE IF NOT EXISTS `step` (
   PRIMARY KEY (`id`),
   KEY `calculator` (`calculator_id`),
   CONSTRAINT `calculator` FOREIGN KEY (`calculator_id`) REFERENCES `calculator` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
--- Dumping data for table logotip.step: ~6 rows (approximately)
+-- Dumping data for table logotip.step: ~9 rows (approximately)
 /*!40000 ALTER TABLE `step` DISABLE KEYS */;
 INSERT INTO `step` (`id`, `stepName`, `stepStatus`, `date`, `calculator_id`) VALUES
 	(1, 'What type of logo are you looking for?', '1', '2020-12-14 15:11:13', 1),
@@ -103,8 +108,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table logotip.user: ~0 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `fullName`, `userEmail`, `userPassword`, `userStatus`, `date`) VALUES
-	(1, 'Mladen', 'mldnmldn@gmail.com', 'dvadva', '0', '2020-12-10 22:25:47'),
-	(2, 'mladen mladen', 'ml@gm.com', '$2y$10$0tOQHnMSruR83zPjSjhZXeqkPvuosSDe6xMK7ANP.wTmcopYox2gG', '0', '2020-12-17 18:07:59');
+	(1, 'Mladen', 'mldnmldn@gmail.com', '$2y$10$0tOQHnMSruR83zPjSjhZXeqkPvuosSDe6xMK7ANP.wTmcopYox2gG', '0', '2020-12-27 18:57:44');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
