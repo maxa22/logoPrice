@@ -12,8 +12,8 @@
         $id = htmlspecialchars($_GET['id']);
         $query = "SELECT * FROM calculator WHERE id = ?";
         $calculator = selectOne($conn, $id, $query);
-        if($calculator['user_id'] !== $_SESSION['id']) {
-            header('Location: index');
+        if($calculator['user_id'] !== $_SESSION['id'] || $calculator['archived'] === '1') {
+            header('Location: ../calculators');
             exit();
         }
         $_SESSION['calculator_id'] = $calculator['id'];
