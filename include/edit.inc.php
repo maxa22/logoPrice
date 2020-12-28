@@ -15,7 +15,9 @@
         header('Location: index');
         exit();
     }
+    
 
+    // update option
     if(isset($_POST['saveOptions'])) {
         require_once('db_connection.php');
         require_once('functions.inc.php');
@@ -27,8 +29,8 @@
                     break;
                 }
                 $optionName = htmlspecialchars($v);
-                $id = explode('-', $k)[1];
-                $calc_id = explode('-', $k)[0];
+                $id = htmlspecialchars(explode('-', $k)[1]);
+                $calc_id = htmlspecialchars(explode('-', $k)[0]);
             }
             if(strpos($k, 'optionPrice')) {
                 $errorMessage = validateNumber($v);
@@ -66,10 +68,12 @@
                     $stmt->execute();
                     $stmt->close();
                     header('Location: ../edit/' . $calc_id);
+                    exit();
                 }
 
         } else {
-            header('Location: ../edit/id' . $calc_id);
+            header('Location: ../edit/' . $calc_id);
+            exit();
         }
     } else {
         if(!$errorMessage) {
@@ -84,10 +88,13 @@
                 $stmt->execute();
                 $stmt->close();
                 header('Location: ../edit/' . $calc_id);
+                exit();
             }
         }
     }
     }
+
+    // add one more option to options table 
     if(isset($_POST['submit'])) {
         require_once('db_connection.php');
         require_once('functions.inc.php');
@@ -98,16 +105,16 @@
                 if($errorMessage) {
                     break;
                 }
-                $optionName = $v;
-                $step_id = explode('-', $k)[1];
-                $calc_id = explode('-', $k)[0];
+                $optionName = htmlspecialchars($v);
+                $step_id = htmlspecialchars(explode('-', $k)[1]);
+                $calc_id = htmlspecialchars(explode('-', $k)[0]);
             }
             if(strpos($k, 'price')) {
                 $errorMessage = validateNumber($v);
                 if($errorMessage) {
                     break;
                 }
-                $optionPrice = $v;
+                $optionPrice = htmlspecialchars($v);
             }
         }
         if(array_key_exists($calc_id . '-' . $step_id . '-url', $_FILES)) {
@@ -135,14 +142,15 @@
         }
     }
 
+    //update question field
     if(isset($_POST['saveQuestion'])) {
         require_once('db_connection.php');
         require_once('functions.inc.php');
         foreach($_POST as $k => $v) {
             if(strpos($k, 'question')) {
-                $question = $v;
-                $calc_id = explode('-', $k)[0];
-                $id = explode('-', $k)[1];
+                $question = htmlspecialchars($v);
+                $calc_id = htmlspecialchars(explode('-', $k)[0]);
+                $id = htmlspecialchars(explode('-', $k)[1]);
             }
         }
         $query = "UPDATE step SET stepName = ? WHERE id = ?";
@@ -155,6 +163,58 @@
             $stmt->execute();
             $stmt->close();
             header('Location: ../edit/' . $calc_id);
+            exit();
         }
+    }
+
+    // update calculator fields
+    if(isset($_POST['saveCalculator'])) {
+        require_once('db_connection.php');
+        require_once('functions.inc.php');
+        $errorMessage = '';
+        foreach($_POST as $key => $value) {
+            if(empty($_POST[$key]) && $key !== 'saveCalculator') {
+                $errorMessage = 'Fields can\'t be empty';
+            }
+            if(strpos($key, 'calculatorName')) {
+                $calculatorId = htmlspecialchars(explode('-', $key)[0]);
+                $calculatorName = htmlspecialchars($_POST[$key]);
+            }
+        }
+        $estimateText = htmlspecialchars($_POST['estimateText']);
+        $calculatorText = htmlspecialchars($_POST['calculatorText']);
+        $calculatorHeading = htmlspecialchars($_POST['calculatorHeading']);
+        $calculatorButton = htmlspecialchars($_POST['calculatorButton']);
+        $calculatorCurrency = htmlspecialchars($_POST['calculatorCurrency']);
+        $backgroundColor = substr($_POST['backgroundColor'], 1);
+        $backgroundColor = htmlspecialchars($backgroundColor);
+        $color = substr($_POST['color'], 1);
+        $color = htmlspecialchars($color);
+
+        $tempName = $_FILES['calculatorLogo']['tmp_name'];
+        $fileName = $_FILES['calculatorLogo']['name'];
+        $error = $_FILES['calculatorLogo']['error'];
+        $directory = 'images/calculator_logo/';
+        $path = file_exists($directory . $fileName) ? $directory . '/' . mt_rand(100, 999) . $fileName : $directory . $fileName;
+        if(move_uploaded_file($tempName, $path) || $error == 4) {
+            $calculatorLogo = $error == 4 ? '' : explode('/', $path)[2];
+        }
+        if(!$errorMessage) {
+            $query = "UPDATE calculator SET calculatorName = ?, estimateText = ?, heading = ?, calculatorText = ?, button = ?, logo = ?, currency = ?, backgroundColor = ?, color = ?, user_id = ? WHERE id = ?";
+            $stmt = $conn->stmt_init();
+            if(!$stmt->prepare($query)) {
+                die($stmt->error);
+            }
+            $stmt->bind_param('sssssssssss', $calculatorName, $estimateText, $calculatorHeading, $calculatorText, $calculatorButton, $calculatorLogo, $calculatorCurrency, $backgroundColor, $color, $_SESSION['id'], $calculatorId);
+            $stmt->execute();
+            $stmt->close();
+            $conn->close();
+            header('Location: ../edit/' . $calculatorId);
+            exit();
+        }
+    }
+    if(!isset($_POST['submit']) || !isset($_POST['saveOption']) || !isset($_POST['saveCalculator']) || !isset($_POST['saveQuestion'])) {
+        header('Location: ../calculators');
+        exit();
     }
 ?>

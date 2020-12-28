@@ -8,33 +8,67 @@ const editbtns = document.querySelectorAll('.form .edit-icon');
 const calcelBtns = document.querySelectorAll('.cancel');
 const options = document.querySelectorAll('.edit-form__option');
 const questions = document.querySelectorAll('.edit-form__question-container');
+const calculator = document.querySelector('.calculator-form');
 
-
+ 
 
 for(let edit of editbtns) {
     edit.addEventListener('click', e => {
         disableInput();
-        curentOption = e.currentTarget.parentElement.parentElement;
-        curentOption.classList.remove('disabled');
-        curentOption.classList.add('active');
-        const inputs = curentOption.querySelectorAll('input');
+        currentOption = e.currentTarget.parentElement.parentElement;
+        currentOption.classList.remove('disabled');
+        currentOption.classList.add('active');
+        const inputs = currentOption.querySelectorAll('input');
+        const textarea = currentOption.querySelectorAll('textarea');
+        let inputValues = [];
         for(let input of inputs) {
             input.removeAttribute('disabled');
+            inputValues.push(input.value);
         }
+        if(textarea) {
+            for(let text of textarea) {
+                text.removeAttribute('disabled');
+            }
+        }
+        const cancel = currentOption.querySelector('.cancel');
+
+        cancel.addEventListener('click', e => {
+            e.preventDefault();
+            removeClasses();
+            for(let i = 0; i < inputs.length; i++) {
+                inputs[i].value = inputValues[i];
+                inputs[i].setAttribute('disabled', 'true');
+            }
+            if(textarea) {
+                for(let text of textarea) {
+                    text.setAttribute('disabled', 'true');
+                }
+            }
+            let img = currentOption.querySelector('img');
+            if(img) {
+                img.src = "";
+            }
+        })
     })
 }
 
-for(const cancel of calcelBtns) {
-    cancel.addEventListener('click', e => {
-        e.preventDefault();
-        removeClasses();
-        const currentOption = e.currentTarget.parentElement;
-        const inputs = currentOption.querySelectorAll('input');
-        for(let input of inputs) {
-            input.setAttribute('disabled', 'true');
-        }
-    })
-}
+// for(const cancel of calcelBtns) {
+//     cancel.addEventListener('click', e => {
+//         e.preventDefault();
+//         removeClasses();
+//         const currentOption = e.currentTarget.parentElement;
+//         const inputs = currentOption.querySelectorAll('input');
+//         const textarea = currentOption.querySelectorAll('textarey');
+//         for(let input of inputs) {
+//             input.setAttribute('disabled', 'true');
+//         }
+//         if(textarea) {
+//             for(let text of textarea) {
+//                 text.setAttribute('disabled', 'true');
+//             }
+//         }
+//     })
+// }
 
 const addOptions = document.querySelectorAll('.add-option');
 
@@ -61,7 +95,7 @@ for(const addOption of addOptions) {
                     <div>
                             <label for="url-${optionCount}" class="file__label">Upload Image</label>
                             <input type="file" name="${id}-url" id="url-${optionCount}" class="new-option">
-                            <span class="file__name"></span>
+                            <img src="" class="option__image">
                     </div>
                     <div class="edit-buttons">
                         <button name="submit" class="save"> Save </button>
@@ -101,42 +135,81 @@ function removeClasses() {
         question.classList.remove('active');
         question.classList.remove('disabled');
     }
+    calculator.classList.remove('active');
+    calculator.classList.remove('disabled');
 }
 
 const files = document.querySelectorAll('input[type="file"]');
 const fileLabels = document.querySelectorAll('.file__label');
 for(const file of files) {
         const container = file.parentElement;
-        const span = container.querySelector('span');
         const value = file.getAttribute('value');
         const label = container.querySelector('label');
         if(value) {
-            span.innerHTML = value;
             label.innerHTML = 'Image uploaded';
         }
 }
 for(const file of files) {
     file.addEventListener('change', () => {
         const container = file.parentElement;
-        const span = container.querySelector('span');
+        const img = container.querySelector('img');
         const label = container.querySelector('label');
         if(file.files.length > 0) {
-            span.innerHTML = file.files[0].name;
-            label.innerHTML = 'Image uploaded';
+            img.src = URL.createObjectURL(file.files[0]);
+            img.onload = function() {
+                URL.revokeObjectURL(img.src);
+            }
         }
-    })
+    });
 }
 
 document.querySelector('.calculator-option').addEventListener('click', e => {
     if(e.target.classList.contains('new-option')) {
         e.target.addEventListener('change', () => {
             const container = e.target.parentElement;
-            const span = container.querySelector('span');
+            const img = container.querySelector('img');
             const label = container.querySelector('label');
             if(e.target.files.length > 0) {
-                span.innerHTML = e.target.files[0].name;
-                label.innerHTML = 'Image uploaded';
+                img.src = URL.createObjectURL(file.files[0]);
+                img.onload = function() {
+                    URL.revokeObjectURL(img.src);
+                }
         }
-        })
+        });
     }
 });
+
+const saveBtns = document.querySelectorAll('.save__option');
+for(const save of saveBtns) {
+    save.addEventListener('click', e => {
+        const currentOption = e.currentTarget.parentElement.parentElement;
+        const inputs = currentOption.querySelectorAll('input[type="text"], input[type="number"]');
+        for(let input of inputs) {   
+            if(input.value.length < 1) {
+                e.preventDefault();
+                let error = currentOption.querySelector('.error-message');
+                error.style.display = "block";
+                error.innerHTML = 'Option and price field can\'t be empty';
+                setTimeout(function hide() {error.style.display = "none"}, 1500);
+            }
+        }
+    });
+}
+
+const calcBtns = document.querySelectorAll('.save__calc');
+for(const calc of calcBtns) {
+    calc.addEventListener('click', e => {
+        const container = e.currentTarget.parentElement;
+        const inputs = currentOption.querySelectorAll('input[type="text"], input[type="number"], textarea');
+        for(let input of inputs) {
+            if(input.value.length < 1) {
+                e.preventDefault();
+                let error = container.querySelector('.error-message');
+                error.style.display = "block";
+                error.scrollIntoView();
+                error.innerHTML = 'Fields can\'t be empty';
+                setTimeout(function hide() {error.style.display = "none"}, 2000);
+            }
+        }
+    });
+}

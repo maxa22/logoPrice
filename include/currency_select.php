@@ -1,6 +1,12 @@
 <!-- money currency html -->
-<select name="calculatorCurrency">
-	<option value="USD" selected="selected">United States Dollars</option>
+<label for="currency">Choose currency</label>
+<select name="calculatorCurrency" id="currency">
+	<?php if($error) { ?>
+		<option value="<?php echo $_POST['calculatorCurrency']; ?>" selected></option>
+		<option value="USD">United States Dollars</option>
+	<?php } else { ?>
+		<option value="USD" selected="selected">United States Dollars</option>
+	<?php } ?>
 	<option value="EUR">Euro</option>
 	<option value="GBP">United Kingdom Pounds</option>
 	<option value="DZD">Algeria Dinars</option>

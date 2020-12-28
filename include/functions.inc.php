@@ -129,14 +129,14 @@
             return $error;
         }
     }
-    //creating calculator name
-    function createCalculator($conn, $name, $heading, $text, $button, $currency, $logo ,$id) {
+    //creating calculator
+    function createCalculator($conn, $name, $estimate, $heading, $text, $button, $currency, $logo, $backgroundColor, $color, $id) {
         $stmt = $conn->stmt_init();
-        if(!$stmt->prepare("INSERT INTO calculator (calculatorName, heading, calculatorText, button, logo, currency, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+        if(!$stmt->prepare("INSERT INTO calculator (calculatorName, estimateText, heading, calculatorText, button, logo, currency, backgroundColor, color, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             $error = 'Error';
             return $error;
         }
-        $stmt->bind_param('sssssss', $name, $heading, $text, $button, $currency, $logo ,$id);
+        $stmt->bind_param('ssssssssss', $name, $estimate, $heading, $text, $button, $currency, $logo, $backgroundColor, $color ,$id);
         $stmt->execute();
         return $stmt->insert_id;
     }

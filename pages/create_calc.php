@@ -10,7 +10,9 @@
     $errorMessage = '';
     require_once('include/db_connection.php');
     require_once('include/functions.inc.php');
+
     if(isset($_POST['submit'])) {
+
         foreach($_POST as $key => $value) {
             if(empty($_POST[$key]) && $key !== 'submit') {
                 $errorMessage = 'Fields can\'t be empty';
@@ -18,10 +20,15 @@
         }
 
         $calculatorName = htmlspecialchars($_POST['calculatorName']);
+        $estimateText = htmlspecialchars($_POST['estimateText']);
         $calculatorText = htmlspecialchars($_POST['calculatorText']);
         $calculatorHeading = htmlspecialchars($_POST['calculatorHeading']);
         $calculatorButton = htmlspecialchars($_POST['calculatorButton']);
         $calculatorCurrency = htmlspecialchars($_POST['calculatorCurrency']);
+        $backgroundColor = substr($_POST['backgroundColor'], 1);
+        $backgroundColor = htmlspecialchars($backgroundColor);
+        $color = substr($_POST['color'], 1);
+        $color = htmlspecialchars($color);
         //performing check of user input and storing the calculator id in SESSION
         $tempName = $_FILES['calculatorLogo']['tmp_name'];
         $fileName = $_FILES['calculatorLogo']['name'];
@@ -32,7 +39,7 @@
             $calculatorLogo = $error == 4 ? '' : explode('/', $path)[2];
         }
         if(!$errorMessage) {
-            if( $id = createCalculator($conn, $calculatorName, $calculatorHeading, $calculatorText, $calculatorButton, $calculatorLogo, $calculatorCurrency,$_SESSION['id'])) {
+            if( $id = createCalculator($conn, $calculatorName,$estimateText, $calculatorHeading, $calculatorText, $calculatorButton, $calculatorLogo, $calculatorCurrency, $backgroundColor, $color,$_SESSION['id'])) {
                 $_SESSION['calculator_id'] = $id;
                 header('Location: questions');
                 exit();
@@ -56,12 +63,16 @@
             <input type="text" name="calculatorName" id="calculator-name" value="<?php echo $_POST['calculatorName'] ?? ''; ?>">
         </div>
         <div>
+            <label for="estimate-text">Estimate Text</label>
+            <textarea name="estimateText" id="estimate-text" cols="30" rows="5" placeholder="What text to display the user on price estimate..." value="<?php echo $_POST['estimateText'] ?? ''; ?>"></textarea>
+        </div>
+        <div>
             <label for="calculator-heading">Calculator Heading</label>
             <input type="text" name="calculatorHeading" id="calculator-heading" value="<?php echo $_POST['calculatorHeading'] ?? ''; ?>">
         </div>
         <div>
             <label for="calculator-text">Calculator Text</label>
-            <textarea name="calculatorText" id="calculator-text" cols="30" rows="10" placeholder="What text to display the user on price estimate..." value="<?php echo $_POST['calculatorText'] ?? ''; ?>"></textarea>
+            <textarea name="calculatorText" id="calculator-text" cols="30" rows="5" placeholder="Calculator text..." value="<?php echo $_POST['calculatorText'] ?? ''; ?>"></textarea>
         </div>
         <div>
             <label for="calculator-button">Calculator Button Text</label>
@@ -70,7 +81,15 @@
         <div>
             <label for="calculator-logo" class="file__label calculator__label">Add logo</label>
             <input type="file" name="calculatorLogo" id="calculator-logo">
-            <span></span>
+            <img src="" alt="" class="calculator__logo">
+        </div>
+        <div>
+            <label for="background-color">Choose background color</label>
+            <input type="color" name="backgroundColor" id="background-color" value="#f4f6f9">
+        </div>
+        <div>
+            <label for="color">Choose text color</label>
+            <input type="color" name="color" id="color" value="#212529">
         </div>
         <div>
             <?php require_once('include/currency_select.php'); ?>

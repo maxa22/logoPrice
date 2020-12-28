@@ -10,7 +10,7 @@
     $calculatorId = '';
     //getting the calculator ID so we can return to the same calculator
     if(isset($_GET['id'])) {
-        $calculatorId = $_GET['id'];
+        $calculatorId = htmlspecialchars($_GET['id']);
         $_SESSION['calculator_id'] = $calculatorId;
     }
     require_once('include/db_connection.php');
@@ -19,6 +19,7 @@
     // return to calculator
     if(isset($_POST['finish'])) {
         $base = str_replace('index.php', '',$_SERVER['PHP_SELF']);
+        unset($_SESSION['calculator_id']);
         header('Location: ' . $base . 'edit/' . $calculatorId);
         exit();
     }

@@ -4,12 +4,20 @@
     if(isset($_GET['id'])) {
         require_once('include/db_connection.php');
         require_once('include/functions.inc.php');
-        $id = $_GET['id'];
+        $id = htmlspecialchars($_GET['id']);
         $errorMessage = '';
         if(!validateCalculator($id)) {
-            $query = "SELECT * FROM calculator WHERE id = ?";
-            // selectOne function returns one row from database
-            $calculator = selectOne($conn, $id, $query);
+            // select calculator with matching id
+            $archived = '0';
+            $query = "SELECT * FROM calculator WHERE id = ? AND archived = ?";
+            $stmt = $conn->stmt_init();
+            if(!$stmt->prepare($query)) {
+                die($stmt->error);
+            }
+            $stmt->bind_param('is', $id, $archived);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $calculator = $result->fetch_assoc();
             if(!$calculator) {
                 header('Location: calculators');
                 exit();
@@ -24,7 +32,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php require_once('include/head.php'); ?>
-<body>
+<body style="background-color: #<?php echo $calculator['backgroundColor']; ?>; color: #<?php echo $calculator['color']; ?> ">
     <?php require_once('include/nav.php'); ?>
     <main>
         <div class="intro">
@@ -79,7 +87,7 @@
                 </div>
             <?php } ?>
     </main>
-    <script src="<?php base(); ?>js/sidebar.js"></script>
     <script src="<?php base(); ?>js/script.js"></script>
+    <script src="<?php base(); ?>js/checkIframe.js"></script>
 </body>
 </html>

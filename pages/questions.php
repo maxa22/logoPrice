@@ -8,11 +8,16 @@
         header('Location: login');
         exit();
     }
+    if(!isset($_SESSION['calculator_id'])) {
+        header('Location: create_calc');
+        exit();
+    }
     $errorMessage = '';
     $successMessage = '';
     require_once('include/db_connection.php');
     require_once('include/functions.inc.php');
     if(isset($_POST['finish'])) {
+        unset($_SESSION['calculator_id']);
         header('Location: calculators');
         exit();
     }

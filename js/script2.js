@@ -22,7 +22,7 @@ addOption.addEventListener('click', e => {
                 <div>
                         <label for="url-${optionCount}" class="file__label">Upload Image</label>
                         <input type="file" name="${optionCount}url" id="url-${optionCount}" class="new-option">
-                        <span class="file__name"></span>
+                        <img src="" class="option__image">
                 </div>
         
         `
@@ -34,25 +34,29 @@ const files = document.querySelectorAll('input[type="file"]');
 for(const file of files) {
         file.addEventListener('change', () => {
             const container = file.parentElement;
-            const span = container.querySelector('span');
+            const img = container.querySelector('img');
             const label = container.querySelector('label');
             if(file.files.length > 0) {
-                span.innerHTML = file.files[0].name;
-                label.innerHTML = 'Image uploaded';
+                img.src = URL.createObjectURL(file.files[0]);
+                img.onload = function() {
+                        URL.revokeObjectURL(img.src); 
+                }
             }
-        })
+        });
     }
 
 document.querySelector('.calculator-option').addEventListener('click', e => {
         if(e.target.classList.contains('new-option')) {
-            e.target.addEventListener('change', () => {
-                const container = e.target.parentElement;
-                const span = container.querySelector('span');
-                const label = container.querySelector('label');
-                if(e.target.files.length > 0) {
-                    span.innerHTML = e.target.files[0].name;
-                    label.innerHTML = 'Image uploaded';
+            let input = e.target;
+            input.addEventListener('change', () => {
+                const container = input.parentElement;
+                const img = container.querySelector('img');
+                if(input.files.length > 0) {
+                    img.src = URL.createObjectURL(input.files[0]);
+                    img.onload = function() {
+                        URL.revokeObjectURL(img.src);
+                    }
             }
-            })
+            });
         }
 });

@@ -12,7 +12,7 @@
     $price = 0;
     foreach($_POST as $k => $v) {
         if(strpos($k, 'answer')) {
-            $id = explode('-', $v)[2];
+            $id = htmlspecialchars(explode('-', $v)[2]);
             $stepId = explode('-', $v)[0];
             $query = "SELECT * FROM options WHERE id = ?";
             $option = selectOne($conn, $id, $query);
@@ -23,7 +23,6 @@
         $_COOKIE['price'] = $price;
     } else {
         setcookie('price', $price, time() + (86400 * 30));
-    }
     }
     //updating all the stepStatus fields from used steps
     $query = "UPDATE step SET stepStatus = '1' WHERE id = ?";
@@ -64,7 +63,10 @@
     $step = selectOne($conn, $stepId, $query);
     $query = "SELECT * FROM calculator WHERE id = ?";
     $calculator = selectOne($conn, $step['calculator_id'], $query);
-    
+    } else {
+        header('Location: index');
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -75,6 +77,10 @@
     <div class="intro form">
         <h1 class="intro__heading">your  estimate <span><?php echo $_COOKIE['price'] . ' ' . $calculator['currency'] ?></span></h1>
     </div>
+    <div class="intro form">
+        <p><?php echo $calculator['estimateText'] ; ?></p>
+    </div>
 
+<script src="<?php base(); ?>js/checkIframe.js"></script>
 </body>
 </html>

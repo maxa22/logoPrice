@@ -2,6 +2,11 @@
     - sanitizing user input and finding user in database
  -->
 <?php
+    session_start();
+    if(isset($_SESSION['id'])) {
+        header('Location: index');
+        exit();
+    }
     require_once('include/db_connection.php');
     require_once('include/functions.inc.php');
     $errorMessage = '';

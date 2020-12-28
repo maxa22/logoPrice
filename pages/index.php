@@ -1,4 +1,6 @@
 <!-- index landing page -->
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <?php require_once('include/head.php'); ?>
 <body>
@@ -9,7 +11,7 @@
         <p>
             Create your calculator. Configure and provide the estimate costs of your logotip creation services.
         </p>
-        <a href="calculator_redirect/1" class="intro__button">View demo</a>
+        <a href="examples" class="intro__button">Examples</a>
         <a href="register" class="intro__button">Sing up</a>
     </div>
     <div class="hero__image">

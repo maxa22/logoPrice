@@ -1,4 +1,3 @@
-<!--  rendering user calculators -->
 <?php
     session_start();
     if(!isset($_SESSION['fullName'])) {
@@ -8,8 +7,7 @@
     }
     require_once('include/db_connection.php');
     require_once('include/functions.inc.php');
-    $http = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-    $iframeLink = $http . '://' . $_SERVER['HTTP_HOST'];
+
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +21,7 @@
         <h1>Dashboard</h1>
     </div>
     <?php 
-        $archived = 0;
+        $archived = 1;
         $query = "SELECT * FROM calculator WHERE user_id = ? AND archived = ?";
         $stmt = $conn->stmt_init();
         if(!$stmt->prepare($query)) {
@@ -45,37 +43,16 @@
                         <span class="calculator__span">Click on calculator name to preview</span>
                     </h3>
                     <span class="calculator__date">Created: <?php $time = strtotime($row['date']); echo date('d-m-Y H:i', $time) ; ?></span>
-                    <a href="edit/<?php echo $row['id']; ?>" class="calculator__btn edit">Edit</a>
-                    <span class="calculator__btn delete">Delete</span>
-                <div class="iframe">
-                    <input type="text" class="iframe__text" value="<iframe src='<?php echo $iframeLink; base(); echo 'calculator_redirect/' .  $row['id']; ?>' width='100%' height='500px' title='Calculator iframe'></iframe>">
-                    <button class="iframe__copy">Copy iframe</button>
-                </div>
-                <div class="modal-overlay">
-                    <div class="modal">
-                        <div class="modal__heading">
-                            <h3>DELETE CONFIRMATION</h3>
-                        </div>
-                        <div class="modal__warning">
-                            <p>Are you sure you want to delete calculator?</p>
-                        </div>
-                        <div class="modal__button">
-                            <a href="include/delete.inc.php?id=<?php echo $row['id']; ?>" class="calculator__btn delete">Delete</a>
-                            <span class="calculator__btn cancel">Cancel</span>
-                        </div>
-                    </div>
-                </div>
+                    <a href="include/restore.inc.php?id=<?php echo $row['id']; ?>" class="calculator__btn edit m-width">Restore</a>
                 </div>
         <?php } ?>
             </div>
         <?php } else { ?>
-            <p>You haven't created any calculators yet...</p>
+            <p>You don't have any calculators in archive...</p>
         <?php } ?>
         
     </div>
     </main>
     <script src="js/sidebar.js"></script>
-    <script src="js/copy.js"></script>
-    <script src="js/modal.js"></script>
 </body>
 </html>

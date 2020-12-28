@@ -18,7 +18,7 @@
             <div>
                 <label for="url-1" class="file__label">Upload Image</label>
                 <input type="file" name="1url" id="url-1">
-                <span class="file__name"></span>
+                <img src="" alt="" class="option__image">
             </div>
         </div>
         <div class="edit-form__option">
@@ -34,7 +34,7 @@
             <div>
                 <label for="url-2" class="file__label">Upload Image</label>
                 <input type="file" name="2url" id="url-2">
-                <span class="file__name"></span>
+                <img src="" alt="" class="option__image">
             </div>
         </div>
     </div>

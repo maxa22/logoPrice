@@ -18,6 +18,8 @@ function load_page($page){
         case 'edit':
         case 'estimate':
         case 'calculator_redirect':
+        case 'archived':
+        case 'examples':
             require 'pages/' . $page . '.php';
         break;  
         default:
