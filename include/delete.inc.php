@@ -1,9 +1,9 @@
-<!-- archive calculator
-    ## functions ##
-    * select - takes three arguments: connection, id, query. Returns every matching row from table provided by query
-    * unlink - removes image file from images folder
--->
-<?php
+<?php 
+    //  archive calculator
+    // ## functions ##
+    // * select - takes three arguments: connection, id, query. Returns every matching row from table provided by query
+    // * unlink - removes image file from images folder
+
     session_start();
     if(!$_SESSION['fullName']) {
         header('Location: ../login');

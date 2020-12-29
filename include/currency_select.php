@@ -1,4 +1,4 @@
-<!-- money currency html -->
+<?php // money currency html ?>
 <label for="currency">Choose currency</label>
 <select name="calculatorCurrency" id="currency">
 	<?php if($error) { ?>

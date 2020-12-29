@@ -1,5 +1,6 @@
-<!--  getting calculator id and rendering calculator content, including steps and options -->
-<?php   
+<?php 
+    //  getting calculator id and rendering calculator content, including steps and options 
+  
     session_start();
     if(isset($_GET['id'])) {
         require_once('include/db_connection.php');
@@ -8,18 +9,10 @@
         $errorMessage = '';
         if(!validateCalculator($id)) {
             // select calculator with matching id
-            $archived = '0';
-            $query = "SELECT * FROM calculator WHERE id = ? AND archived = ?";
-            $stmt = $conn->stmt_init();
-            if(!$stmt->prepare($query)) {
-                die($stmt->error);
-            }
-            $stmt->bind_param('is', $id, $archived);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $calculator = $result->fetch_assoc();
+            $query = "SELECT * FROM calculator WHERE id = ?";
+            $calculator = selectOne($conn, $id, $query);
             if(!$calculator) {
-                header('Location: calculators');
+                header('Location: ../index');
                 exit();
             }
         }
@@ -31,7 +24,11 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<?php require_once('include/head.php'); ?>
+<?php 
+    require_once('include/head.php'); 
+    if($calculator['archived'] == '0') {    
+?>
+
 <body style="background-color: #<?php echo $calculator['backgroundColor']; ?>; color: #<?php echo $calculator['color']; ?> ">
     <?php require_once('include/nav.php'); ?>
     <main>
@@ -63,13 +60,11 @@
 
                                 <div>
                                     <input type="radio" name="<?php echo $stepRow['id'] . '-answer'; ?>" id="<?php echo $optionRow['optionName']  . '-' . $stepRow['id']; ?> " value="<?php echo $stepRow['id'] . '-answer-' . $optionRow['id']; ?> ">
-                                    <label for="<?php echo $optionRow['optionName'] . '-' . $stepRow['id']; ?> " class="option__label">
-                                        <span class="option__image-container">
+                                    <label for="<?php echo $optionRow['optionName'] . '-' . $stepRow['id']; ?> " class="option__label d-flex fd-c ai-c jc-c">
                                             <?php if($optionRow['optionImage']) { ?>
-                                                <img src="<?php base(); ?>images/<?php echo $optionRow['optionImage'] ?>" alt="<?php echo $optionRow['optionName']; ?>" class="option__image">
+                                                <img src="<?php base(); ?>images/<?php echo $optionRow['optionImage'] ?>" alt="<?php echo $optionRow['optionName']; ?>" class="option-image">
                                             <?php } ?>
-                                    </span>
-                                        <h3><?php echo $optionRow['optionName'] ?></h3>
+                                        <span class="option-span-text"><?php echo $optionRow['optionName'] ?></span>
                                     </label>
                                 </div>
                                 <?php } ?>
@@ -88,6 +83,17 @@
             <?php } ?>
     </main>
     <script src="<?php base(); ?>js/script.js"></script>
-    <script src="<?php base(); ?>js/checkIframe.js"></script>
+    <script src="<?php base(); ?>js/check_iframe.js"></script>
 </body>
+<?php } else { ?>
+<body>
+<?php require_once('include/nav.php'); ?>
+    <main>
+        <div class="intro form">
+            <h1 class="intro__heading mb-s">Calculator no longer in use...</h1>
+            <a href="../examples" class="intro__button">Check out another calculator</a>
+        </div>
+    </main>
+</body>
+<?php } ?>
 </html>

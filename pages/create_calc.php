@@ -1,5 +1,6 @@
-<!--  creating calculator -->
 <?php
+
+    // create calculator
 
     session_start();
     if(!isset($_SESSION['fullName'])) {

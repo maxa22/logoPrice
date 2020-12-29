@@ -194,10 +194,10 @@
         $tempName = $_FILES['calculatorLogo']['tmp_name'];
         $fileName = $_FILES['calculatorLogo']['name'];
         $error = $_FILES['calculatorLogo']['error'];
-        $directory = 'images/calculator_logo/';
+        $directory = '../images/calculator_logo/';
         $path = file_exists($directory . $fileName) ? $directory . '/' . mt_rand(100, 999) . $fileName : $directory . $fileName;
         if(move_uploaded_file($tempName, $path) || $error == 4) {
-            $calculatorLogo = $error == 4 ? '' : explode('/', $path)[2];
+            $calculatorLogo = $error == 4 ? '' : explode('/', $path)[3];
         }
         if(!$errorMessage) {
             $query = "UPDATE calculator SET calculatorName = ?, estimateText = ?, heading = ?, calculatorText = ?, button = ?, logo = ?, currency = ?, backgroundColor = ?, color = ?, user_id = ? WHERE id = ?";

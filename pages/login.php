@@ -1,7 +1,6 @@
-<!-- 
-    - sanitizing user input and finding user in database
- -->
 <?php
+    // - sanitizing user input and finding user in database
+
     session_start();
     if(isset($_SESSION['id'])) {
         header('Location: index');

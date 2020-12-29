@@ -1,4 +1,6 @@
 <?php
+    // rendering archived calculators
+
     session_start();
     if(!isset($_SESSION['fullName'])) {
         session_unset();

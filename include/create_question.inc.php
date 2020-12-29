@@ -1,15 +1,14 @@
-<!-- 
-    - validating and sanitizing user input, adding step and questions to matching tables 
-    ## functions ##
-    * validateCalculator - takes one argument and returns an error message if the argument is empty or contains any special character
-    * validateNumber - takes one argument and returns an error message if the argument isnt't a number
-    * validateFileUpload - validating uploaded file. Takes one argument(key of the global $_FILES array), returns an error message if: 
-    -file extension isnt' jpeg, jpg, or png
-    -error message from $_FILES array isn't 0 or 4
-    -file size is greater than 2MB
-    * createStep - takes three arguments: connection, question and calculator id, creates new row in step table
-
--->
+<?php
+    // - validating and sanitizing user input, adding step and questions to matching tables 
+    // ## functions ##
+    // * validateCalculator - takes one argument and returns an error message if the argument is empty or contains any special character
+    // * validateNumber - takes one argument and returns an error message if the argument isnt't a number
+    // * validateFileUpload - validating uploaded file. Takes one argument(key of the global $_FILES array), returns an error message if: 
+    // -file extension isnt' jpeg, jpg, or png
+    // -error message from $_FILES array isn't 0 or 4
+    // -file size is greater than 2MB
+    // * createStep - takes three arguments: connection, question and calculator id, creates new row in step table
+?>
 <?php 
     foreach($_POST as $k => $v) {
         if(strpos($k,'question') || strpos($k, 'name')) {

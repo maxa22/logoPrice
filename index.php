@@ -1,4 +1,4 @@
-<!-- Here we include proper page -->
+<?php // Here we include proper page ?>
 <?php require 'main.php'; ?>
 
 <?php if(!isset($_GET['page'])) {

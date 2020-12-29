@@ -1,9 +1,9 @@
-<!--  getting the id of the calculator to render the steps and options  -->
 <?php
+    // getting the id of the calculator to render the steps and options
 
     session_start();
     if(!isset($_SESSION['fullName'])) {
-        header('Location: login');
+        header('Location: ../login');
         exit();
     }
     if(isset($_GET['id'])){
@@ -18,7 +18,7 @@
         }
         $_SESSION['calculator_id'] = $calculator['id'];
     } else {
-        header('Location: calculators');
+        header('Location: ../calculators');
     }
 ?>
 
@@ -69,7 +69,11 @@
                     <label for="calculator-logo">Add logo</label>
                     <label for="calculator-logo" class="file__label calculator__label d-block">Upload Image</label>
                     <input type="file" name="calculatorLogo" id="calculator-logo" disabled >
-                    <img src="" alt="" class="calculator__logo">
+                    <?php if($calculator['logo']) { ?>
+                        <img src="<?php base(); echo 'images/calculator_logo/' . $calculator['logo']; ?>" alt="" class="calculator__logo">
+                    <?php } else { ?>
+                        <img src="" alt="" class="calculator__logo">
+                    <?php } ?>
                 </div>
             </div>
             <div class="d-flex jc-sb gap-m">
@@ -131,7 +135,7 @@
                             <div>
                                 <label for="<?php echo $optionRow['id'] . '-optionImage'; ?>" class="file__label">Upload Image</label>
                                 <input type="file" disabled name="<?php echo $optionRow['id'] . '-optionImage'; ?>" id="<?php echo $optionRow['id'] . '-optionImage'; ?>" value="<?php echo $optionRow['optionImage']; ?>">
-                                <img src="" class="option__image">
+                                <img src="<?php base(); echo 'images/' . $optionRow['optionImage']; ?>" class="option__image">
                             </div>
                             <div class="edit-form__icons">
                                 <span class="edit-icon">

@@ -1,7 +1,6 @@
-<!-- 
-    the file includes create_question for storing provided data and question_form for providing the data 
--->
 <?php
+    // the file includes create_question for storing provided data and question_form for providing the data 
+
 
     session_start();
     if(!isset($_SESSION['fullName'])) {

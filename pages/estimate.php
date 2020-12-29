@@ -1,9 +1,9 @@
-<!-- 
-    - calculating the price of the options choosen by the user
-    - updating status of the step, and status of the choosen option in matching database tables and rows
-    - storing the price in a cookie and displaying it to user
- -->
 <?php
+    // - calculating the price of the options choosen by the user
+    // - updating status of the step, and status of the choosen option in matching database tables and rows
+    // - storing the price in a cookie and displaying it to user
+
+
     session_start();
     if(isset($_POST['submit'])) {
     // getting the prices of the selected radio inputs, calculating them and storing in price variable
@@ -72,15 +72,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php require_once('include/head.php'); ?>
-<body>
+<body style="background-color: #<?php echo $calculator['backgroundColor']; ?>; color: #<?php echo $calculator['color']; ?> ">
     <?php require_once('include/nav.php'); ?>
     <div class="intro form">
         <h1 class="intro__heading">your  estimate <span><?php echo $_COOKIE['price'] . ' ' . $calculator['currency'] ?></span></h1>
     </div>
-    <div class="intro form">
+    <div class="intro form" >
         <p><?php echo $calculator['estimateText'] ; ?></p>
     </div>
 
-<script src="<?php base(); ?>js/checkIframe.js"></script>
+<script src="<?php base(); ?>js/check_iframe.js"></script>
+<script src="<?php base(); ?>js/check_color.js"></script>
 </body>
 </html>

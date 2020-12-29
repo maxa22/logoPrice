@@ -1,5 +1,7 @@
-<!--  rendering user calculators -->
-<?php
+<?php  
+
+    // rendering user calculators
+
     session_start();
     if(!isset($_SESSION['fullName'])) {
         session_unset();
@@ -24,7 +26,7 @@
     </div>
     <?php 
         $archived = 0;
-        $query = "SELECT * FROM calculator WHERE user_id = ? AND archived = ?";
+        $query = "SELECT * FROM calculator WHERE user_id = ? AND archived = ? ORDER BY id DESC";
         $stmt = $conn->stmt_init();
         if(!$stmt->prepare($query)) {
             die($stmt->error);
@@ -42,11 +44,16 @@
                         <a href="<?php echo 'calculator_redirect/' .  $row['id']; ?>">
                             <?php echo $row['calculatorName']; ?>
                         </a>
-                        <span class="calculator__span">Click on calculator name to preview</span>
+                        <span class="calculator__span">(Click on calculator name to preview)</span>
                     </h3>
-                    <span class="calculator__date">Created: <?php $time = strtotime($row['date']); echo date('d-m-Y H:i', $time) ; ?></span>
+                    <span class="calculator__date"><?php $time = strtotime($row['date']); echo date('d-m-Y H:i', $time) ; ?></span>
                     <a href="edit/<?php echo $row['id']; ?>" class="calculator__btn edit">Edit</a>
-                    <span class="calculator__btn delete">Delete</span>
+                    <span class="calculator__btn delete">Archive</span>
+                    <?php if($row['defaultCalculators'] == 0) { ?>
+                        <a href="include/set_example.inc.php?id=<?php echo $row['id']; ?>" class="calculator__btn primary-btn">Set as example</a>
+                    <?php } else { ?>
+                        <a href="include/remove_example.inc.php?id=<?php echo $row['id']; ?>" class="calculator__btn primary-btn">Remove from examples</a>
+                    <?php } ?>
                 <div class="iframe">
                     <input type="text" class="iframe__text" value="<iframe src='<?php echo $iframeLink; base(); echo 'calculator_redirect/' .  $row['id']; ?>' width='100%' height='500px' title='Calculator iframe'></iframe>">
                     <button class="iframe__copy">Copy iframe</button>
@@ -54,13 +61,13 @@
                 <div class="modal-overlay">
                     <div class="modal">
                         <div class="modal__heading">
-                            <h3>DELETE CONFIRMATION</h3>
+                            <h3>ARCHIVE CONFIRMATION</h3>
                         </div>
                         <div class="modal__warning">
                             <p>Are you sure you want to delete calculator?</p>
                         </div>
                         <div class="modal__button">
-                            <a href="include/delete.inc.php?id=<?php echo $row['id']; ?>" class="calculator__btn delete">Delete</a>
+                            <a href="include/delete.inc.php?id=<?php echo $row['id']; ?>" class="calculator__btn delete">Archive</a>
                             <span class="calculator__btn cancel">Cancel</span>
                         </div>
                     </div>

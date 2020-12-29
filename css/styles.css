@@ -1,10 +1,3 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
-
 :root {
   --main-background: #f4f6f9;
   --nav-color: rgba(0, 0, 0, 0.5);
@@ -29,6 +22,7 @@
   padding: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
 }
 html {
   font-size: 62.5%;
@@ -36,7 +30,7 @@ html {
 }
 body {
   min-height: 100vh;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   background-color: var(--main-background);
   color: var(--text-color);
   position: relative;
@@ -47,9 +41,23 @@ h3,
 h4 {
   font-weight: 500;
 }
+input,
+textarea,
+button {
+  font-family: "Quicksand", sans-serif;
+}
 .d-flex {
   display: flex;
   gap: 2rem;
+}
+.fd-c {
+  flex-direction: column;
+}
+.jc-c {
+  justify-content: center;
+}
+.ai-c {
+  align-items: center;
 }
 .gap-m {
   gap: 4rem;
@@ -67,6 +75,14 @@ h4 {
 }
 .mb-s {
   margin-bottom: 2rem;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 4rem);
 }
 .file__label.d-block {
   display: block;
@@ -165,6 +181,9 @@ header {
   max-width: 60rem;
   text-align: center;
 }
+.intro.dark {
+  border: 1px solid #343a40;
+}
 .intro__heading {
   text-transform: uppercase;
 }
@@ -172,6 +191,7 @@ header {
   margin: 2rem 0 3rem;
 }
 .intro__button {
+  cursor: pointer;
   padding: 1.25rem 3rem;
   border: none;
   color: #fff;
@@ -217,13 +237,12 @@ input[type="radio"] {
 .option__label {
   cursor: pointer;
   height: 100%;
-  color: var(--text-color);
-  display: block;
-  background: #fff;
-  border: 1px solid var(--input-border);
   padding: 1rem;
   margin-bottom: 1rem;
   text-align: center;
+  background: #fff;
+  color: var(--text-color);
+  border: 1px solid var(--input-border);
   position: relative;
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -252,23 +271,16 @@ input[type="radio"]:checked + .option__label::after {
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
 }
-.option__label h3 {
+.option-span-text {
+  display: block;
   text-transform: uppercase;
 }
-.option__image-container {
-  min-height: 10rem;
-  overflow: hidden;
-  text-align: center;
-  display: -ms-grid;
-  display: grid;
-  place-items: center;
-  margin-bottom: 2rem;
-}
-.option__image {
+
+.option-image {
   height: auto;
   width: 100%;
   max-width: 20rem;
-  display: block;
+  display: inline-block;
 }
 
 form button {
@@ -484,7 +496,7 @@ main {
   display: block;
   margin: 1rem 0;
   text-transform: none;
-  font-size: 80%;
+  font-size: 1.1rem;
 }
 .calculator__date {
   display: block;
@@ -775,6 +787,18 @@ form .calculator__label {
   background-color: #f8d7da;
   color: #721c24;
   padding: 0.75rem;
+}
+.primary-btn {
+  background-color: var(--primary);
+  color: #fff;
+  width: 100%;
+  margin-top: 1rem;
+}
+.primary-btn:hover {
+  background-color: var(--primary-hover);
+}
+.mb-m {
+  margin-bottom: 5rem;
 }
 @media screen and (max-width: 1200px) {
   .edit-form__option {

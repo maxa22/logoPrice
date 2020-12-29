@@ -1,5 +1,5 @@
-<!-- connecting to database -->
-<?php
+<?php // connecting to database 
+
 
     $serverName = 'localhost';
     $port = 3306;

@@ -1,5 +1,6 @@
-<!-- array containing the error messages from move_uploaded_file function as keys and more user friendly messages as values  -->
 <?php 
+// array containing the error messages from move_uploaded_file function as keys and more user friendly messages as values
+
     $fileUploadError = array(
         UPLOAD_ERR_INI_SIZE		=> "The uploaded file exceeds the upload_max_filesize directive in php.ini",
         UPLOAD_ERR_FORM_SIZE    => "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form",

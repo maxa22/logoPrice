@@ -1,5 +1,6 @@
-<!-- restore calculator -->
 <?php
+    // restore calculator
+
     session_start();
     if(!$_SESSION['fullName']) {
         header('Location: ../login');

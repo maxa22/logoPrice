@@ -1,14 +1,14 @@
-<!--  creating the user and redirecting to login page
-    ## functions ##
-    * validateUserInput - takes five arguments: connection, user name, user email, user password, user retype password
-    returns error message if:
-    - one of the provided arguments is empty
-    - user name contains special characters
-    - user email isn't a valid email
-    - user email exists in database
-    - user password and user retype password don't match
- -->
 <?php
+//    creating the user and redirecting to login page
+//     ## functions ##
+//     * validateUserInput - takes five arguments: connection, user name, user email, user password, user retype password
+//     returns error message if:
+//     - one of the provided arguments is empty
+//     - user name contains special characters
+//     - user email isn't a valid email
+//     - user email exists in database
+//     - user password and user retype password don't match
+
     if(isset($_SESSION['id'])) {
         header('Location: index');
         exit();

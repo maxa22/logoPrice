@@ -1,5 +1,6 @@
-<!--  rendering user calculators -->
 <?php
+    //  rendering user calculators 
+    
     session_start();
     require_once('include/db_connection.php');
     require_once('include/functions.inc.php');
@@ -16,12 +17,13 @@
     </div>
     <?php 
         $default = '1';
-        $query = "SELECT * FROM calculator WHERE defaultCalculators = ?";
+        $archived = '0';
+        $query = "SELECT * FROM calculator WHERE defaultCalculators = ? AND archived = ?";
         $stmt = $conn->stmt_init();
         if(!$stmt->prepare($query)) {
             die($stmt->error);
         }
-        $stmt->bind_param('s', $default);
+        $stmt->bind_param('ss', $default, $archived);
         $stmt->execute();
         $calculators = $stmt->get_result();
         $stmt->close();
@@ -32,8 +34,8 @@
                 <div class="calculator">
                     <img src="images/calculator.svg" alt="calculator" class="calculator__image">
                     <h3><?php echo $row['calculatorName']; ?></h3>
-                    <p class="intro__paragraph"><?php echo $row['calculatorText']; ?></p>
-                    <a class="intro__button" href="calculator_redirect/<?php echo $row['id']; ?>">Check it out</a>
+                    <p class="intro__paragraph mb-m"><?php echo $row['calculatorText']; ?></p>
+                    <a class="intro__button bottom" href="calculator_redirect/<?php echo $row['id']; ?>">Check it out</a>
                 </div>
         <?php } ?>
             </div>

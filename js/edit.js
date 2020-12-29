@@ -20,6 +20,8 @@ for(let edit of editbtns) {
         currentOption.classList.add('active');
         const inputs = currentOption.querySelectorAll('input');
         const textarea = currentOption.querySelectorAll('textarea');
+        let img = currentOption.querySelector('img');
+        let value = img.getAttribute('src');
         let inputValues = [];
         for(let input of inputs) {
             input.removeAttribute('disabled');
@@ -44,9 +46,12 @@ for(let edit of editbtns) {
                     text.setAttribute('disabled', 'true');
                 }
             }
-            let img = currentOption.querySelector('img');
             if(img) {
-                img.src = "";
+                if(value) {
+                    img.src = value;
+                } else {
+                    img.src = "";
+                }
             }
         })
     })
@@ -108,13 +113,27 @@ for(const addOption of addOptions) {
 }
 
 const calculatorOptions = document.querySelectorAll('.calculator-option');
+
 for(let calculatorOption of calculatorOptions) {
     calculatorOption.addEventListener('click', e =>{
         if(e.target.classList.contains('addCancel')) {
             e.currentTarget.removeChild(e.currentTarget.lastElementChild);
             removeClasses();
         }
-    })
+        if(e.target.classList.contains('new-option')) {
+            e.target.addEventListener('change', event => {
+                const container = event.target.parentElement;
+                const img = container.querySelector('img');
+                const label = container.querySelector('label');
+                if(event.target.files.length > 0) {
+                    img.src = URL.createObjectURL(event.target.files[0]);
+                    img.onload = function() {
+                        URL.revokeObjectURL(img.src);
+                    }
+                }
+            });
+        };
+    });
 }   
 
 function disableInput() {
@@ -163,21 +182,6 @@ for(const file of files) {
     });
 }
 
-document.querySelector('.calculator-option').addEventListener('click', e => {
-    if(e.target.classList.contains('new-option')) {
-        e.target.addEventListener('change', () => {
-            const container = e.target.parentElement;
-            const img = container.querySelector('img');
-            const label = container.querySelector('label');
-            if(e.target.files.length > 0) {
-                img.src = URL.createObjectURL(file.files[0]);
-                img.onload = function() {
-                    URL.revokeObjectURL(img.src);
-                }
-        }
-        });
-    }
-});
 
 const saveBtns = document.querySelectorAll('.save__option');
 for(const save of saveBtns) {

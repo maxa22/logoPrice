@@ -1,9 +1,9 @@
-<!--  delete option user selected
-    ## functions ##
-    selectOne - takes three arguments: connection, id, query, returns row from database table depending on query
-    delete - takes three arguments: connection, id, query, deletes row from database table
- -->
-<?php
+<?php  
+    // delete option user selected
+    // ## functions ##
+    // selectOne - takes three arguments: connection, id, query, returns row from database table depending on query
+    // delete - takes three arguments: connection, id, query, deletes row from database table
+
     session_start();
     if(!$_SESSION['fullName']) {
         header('Location: ../login');
