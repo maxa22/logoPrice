@@ -74,14 +74,13 @@
 <?php require_once('include/head.php'); ?>
 <body style="background-color: #<?php echo $calculator['backgroundColor']; ?>; color: #<?php echo $calculator['color']; ?> ">
     <?php require_once('include/nav.php'); ?>
-    <div class="intro form">
+    <div class="intro" >
         <h1 class="intro__heading">your  estimate <span><?php echo $_COOKIE['price'] . ' ' . $calculator['currency'] ?></span></h1>
     </div>
-    <div class="intro form" >
+    <div class="intro">
         <p><?php echo $calculator['estimateText'] ; ?></p>
     </div>
 
 <script src="<?php base(); ?>js/check_iframe.js"></script>
-<script src="<?php base(); ?>js/check_color.js"></script>
 </body>
 </html>

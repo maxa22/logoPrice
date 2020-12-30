@@ -190,16 +190,26 @@
         $backgroundColor = htmlspecialchars($backgroundColor);
         $color = substr($_POST['color'], 1);
         $color = htmlspecialchars($color);
-
-        $tempName = $_FILES['calculatorLogo']['tmp_name'];
-        $fileName = $_FILES['calculatorLogo']['name'];
-        $error = $_FILES['calculatorLogo']['error'];
-        $directory = '../images/calculator_logo/';
-        $path = file_exists($directory . $fileName) ? $directory . '/' . mt_rand(100, 999) . $fileName : $directory . $fileName;
-        if(move_uploaded_file($tempName, $path) || $error == 4) {
-            $calculatorLogo = $error == 4 ? '' : explode('/', $path)[3];
+        if($_FILES['calculatorLogo']['error'] != 4 ) {
+            $errorMessage = validateFileUpload($_FILES['calculatorLogo']);
         }
         if(!$errorMessage) {
+            if($_FILES['calculatorLogo']['error'] != 4 ) {
+                $query = "SELECT * FROM calculator WHERE id = ?";
+                $calculator = selectOne($conn, $calculatorId, $query);
+                if($calculator['logo']) {
+                    unlink('../images/calculator_logo/' . $calculator['logo']);
+                }
+                $tempName = $_FILES['calculatorLogo']['tmp_name'];
+                $fileName = $_FILES['calculatorLogo']['name'];
+                $error = $_FILES['calculatorLogo']['error'];
+                $directory = '../images/calculator_logo/';
+                $path = file_exists($directory . $fileName) ? $directory . '/' . mt_rand(100, 999) . $fileName : $directory . $fileName;
+                if(move_uploaded_file($tempName, $path) || $error == 4) {
+                    $calculatorLogo = $error == 4 ? '' : explode('/', $path)[3];
+                }
+                
+            }
             $query = "UPDATE calculator SET calculatorName = ?, estimateText = ?, heading = ?, calculatorText = ?, button = ?, logo = ?, currency = ?, backgroundColor = ?, color = ?, user_id = ? WHERE id = ?";
             $stmt = $conn->stmt_init();
             if(!$stmt->prepare($query)) {
