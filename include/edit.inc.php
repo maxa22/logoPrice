@@ -191,7 +191,7 @@
         $color = substr($_POST['color'], 1);
         $color = htmlspecialchars($color);
         if($_FILES['calculatorLogo']['error'] != 4 ) {
-            $errorMessage = validateFileUpload($_FILES['calculatorLogo']);
+            $errorMessage = validateFileUpload('calculatorLogo');
         }
         if(!$errorMessage) {
             if($_FILES['calculatorLogo']['error'] != 4 ) {
