@@ -210,6 +210,7 @@
                 }
                 
             }
+            $calculatorLogo = $calculatorLogo ?? '';
             $query = "UPDATE calculator SET calculatorName = ?, estimateText = ?, heading = ?, calculatorText = ?, button = ?, logo = ?, currency = ?, backgroundColor = ?, color = ?, user_id = ? WHERE id = ?";
             $stmt = $conn->stmt_init();
             if(!$stmt->prepare($query)) {
