@@ -849,4 +849,10 @@ form .calculator__label {
   .edit-form__option {
     width: 100%;
   }
+  .calculator-form .d-flex {
+    flex-direction: column;
+  }
+  .calculator-form .w-50 {
+    width: 100%;
+  }
 }
