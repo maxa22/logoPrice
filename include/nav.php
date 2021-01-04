@@ -1,5 +1,5 @@
 <header>
-    <nav class="navigation">
+    <nav class="navigation index-nav">
         <a href="index" class="navigation__link logo">LOGOTIP</a>
         <ul class="navigation__menu">
             <?php if(isset($_SESSION['id'])) { ?>

@@ -110,8 +110,13 @@ header {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  padding: 0 7rem;
+  padding: 0 2rem 0 7rem;
   margin: 0 auto;
+}
+.index-nav {
+  margin: 0 auto;
+  max-width: 144rem;
+  padding: 0 7rem;
 }
 .navigation__link.logo,
 .navigation__link.logo:link {
@@ -145,8 +150,9 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 7rem;
   margin: 0 auto;
+  max-width: 144rem;
+  padding: 0 7rem;
 }
 .hero__text,
 .hero__image {
@@ -228,7 +234,7 @@ header {
 .input-wrapper__options {
   display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
   gap: 4rem;
 }
 input[type="radio"] {
@@ -358,7 +364,7 @@ select {
 
 /* ##### ADMIN PANEL ##### */
 .navigation-admin {
-  padding: 0 7rem;
+  padding: 0 2rem 0 7rem;
 }
 #sidebar-toggle {
   cursor: pointer;
@@ -451,7 +457,7 @@ select {
 }
 
 main {
-  padding: 1rem 7rem;
+  padding: 0 2rem 0 7rem;
   margin: 0 auto;
 }
 /* ##### END OF ADMIN PANEL ##### */
@@ -825,7 +831,7 @@ form .calculator__label {
     justify-content: center;
   }
 }
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 786px) {
   .navigation-admin,
   main,
   .navigation {
@@ -837,6 +843,12 @@ form .calculator__label {
     width: 95%;
     padding: 0;
   }
+  .calculator-form .d-flex {
+    flex-direction: column;
+  }
+  .calculator-form .w-50 {
+    width: 100%;
+  }
   .sidebar {
     width: 0;
     opacity: 0;
@@ -845,14 +857,23 @@ form .calculator__label {
     opacity: 1;
   }
 }
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 550px) {
+  .navigation__link.tablet {
+    display: none;
+  }
+  .navigation__link.logo,
+  .navigation__link.logo:link {
+    font-size: 2rem;
+  }
+
+  .input-wrapper {
+    margin: 5rem auto;
+    width: 80%;
+  }
+  .input-wrapper__options {
+    grid-template-columns: 1fr;
+  }
   .edit-form__option {
-    width: 100%;
-  }
-  .calculator-form .d-flex {
-    flex-direction: column;
-  }
-  .calculator-form .w-50 {
     width: 100%;
   }
 }
